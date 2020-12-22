@@ -1,0 +1,259 @@
+## 2.12.2020 sprawdzenie poprawności 
+
+```
+5' AGCTTTACTCCCTTCCCTTC
+5' CTCGTTTCGCTTGTCATCTC
+5' CCTCCTGCGTCTTATTGTTG
+
+5' AGCTTTACTCCCTTCCCTTC-CCTCCTGCGTCTTATTGTTG-CCTGTTGCCCTTCTCTCTAA
+5' GATTGGGAGGGAAAGGATGA-CTCGTTTCGCTTGTCATCTC-TTAGAGAGAAGGGCAACAGG - jest odwracana 
+5' TCATCCTTTCCCTCCCAATC-CAACAATAAGACGCAGGAGG-CGCCCCACTTTCTACTTTTC
+5' TGAGCACGGAGAAGGAATAG-CTCGTTTCGCTTGTCATCTC-GAAAAGTAGAAAGTGGGGCG - jest obracana
+5' CTATTCCTTCTCCGTGCTCA-CAACAATAAGACGCAGGAGG-TCTTATCCACTCCCCTTCCT
+5' CCAGGAAAACGGAGGAAGTA-CCTCCTGCGTCTTATTGTTG-AGGAAGGGGAGTGGATAAGA - jest obracana
+5' TACTTCCTCCGTTTTCCTGG-GAGCAAAGCGAACAGTAGAG-CATTCCCTTCCTGCTTACCT
+```
+
+składanie:
+```
+  |--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------| 
+5' AGCTTTACTCCCTTCCCTTC-CCTCCTGCGTCTTATTGTTG-CCTGTTGCCCTTCTCTCTAA
+                                          3' GGACAACGGGAAGAGAGATT-CTCTACTGTTCGCTTTGCTC-AGTAGGAAAGGGAGGGTTAG
+                                                                                    5' TCATCCTTTCCCTCCCAATC-CAACAATAAGACGCAGGAGG-CGCCCCACTTTCTACTTTTC
+                                                                                                                              3' GCGGGGTGAAAGATGAAAAG-CTCTACTGTTCGCTTTGCTC-GATAAGGAAGAGGCACGAGT
+                                                                                                                                                                        5' CTATTCCTTCTCCGTGCTCA-CAACAATAAGACGCAGGAGG-TCTTATCCACTCCCCTTCCT
+                                                                                                                                                                                                                  3' AGAATAGGTGAGGGGAAGGA-GTTGTTATTCTGCGTCCTCC-ATGAAGGAGGCAAAAGGACC
+                                                                                                                                                                                                                                                            5' TACTTCCTCCGTTTTCCTGG-GAGCAAAGCGAACAGTAGAG-CATTCCCTTCCTGCTTACCT
+
+5' AGCTTTACTCCCTTCCCTTC-CCTCCTGCGTCTTATTGTTG-CCTGTTGCCCTTCTCTCTAA                      TCATCCTTTCCCTCCCAATC-CAACAATAAGACGCAGGAGG-CGCCCCACTTTCTACTTTTC                      CTATTCCTTCTCCGTGCTCA-CAACAATAAGACGCAGGAGG-TCTTATCCACTCCCCTTCCT                      TACTTCCTCCGTTTTCCTGG-GAGCAAAGCGAACAGTAGAG-CATTCCCTTCCTGCTTACCT
+3'                                           GGACAACGGGAAGAGAGATT-CTCTACTGTTCGCTTTGCTC-AGTAGGAAAGGGAGGGTTAG                      GCGGGGTGAAAGATGAAAAG-CTCTACTGTTCGCTTTGCTC-GATAAGGAAGAGGCACGAGT                      AGAATAGGTGAGGGGAAGGA-GTTGTTATTCTGCGTCCTCC-ATGAAGGAGGCAAAAGGACC
+```
+
+komplet:
+
+```
+5' AGCTTTACTCCCTTCCCTTC-CCTCCTGCGTCTTATTGTTG-CCTGTTGCCCTTCTCTCTAA-GAGATGACAAGCGAAACGAG-TCATCCTTTCCCTCCCAATC-CAACAATAAGACGCAGGAGG-CGCCCCACTTTCTACTTTTC-GAGATGACAAGCGAAACGAG-CTATTCCTTCTCCGTGCTCA-CAACAATAAGACGCAGGAGG-TCTTATCCACTCCCCTTCCT-CAACAATAAGACGCAGGAGG-TACTTCCTCCGTTTTCCTGG-GAGCAAAGCGAACAGTAGAG-CATTCCCTTCCTGCTTACCT
+3' TCGAAATGAGGGAAGGGAAG-GGAGGACGCAGAATAACAAC-GGACAACGGGAAGAGAGATT-CTCTACTGTTCGCTTTGCTC-AGTAGGAAAGGGAGGGTTAG-GTTGTTATTCTGCGTCCTCC-GCGGGGTGAAAGATGAAAAG-CTCTACTGTTCGCTTTGCTC-GATAAGGAAGAGGCACGAGT-GTTGTTATTCTGCGTCCTCC-AGAATAGGTGAGGGGAAGGA-GTTGTTATTCTGCGTCCTCC-ATGAAGGAGGCAAAAGGACC-CTCGTTTCGCTTGTCATCTC-GTAAGGGAAGGACGAATGGA
+  |--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------| 
+```
+
+Odczyt:
+
+```
+A  5' CTCGTTTCGCTTGTCATCTC -> 3' CTCTACTGTTCGCTTTGCTC  
+B  5' CCTCCTGCGTCTTATTGTTG -> 3' GTTGTTATTCTGCGTCCTCC
+
+  |--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|
+5' AGCTTTACTCCCTTCCCTTC-CCTCCTGCGTCTTATTGTTG-CCTGTTGCCCTTCTCTCTAA-GAGATGACAAGCGAAACGAG-TCATCCTTTCCCTCCCAATC-CAACAATAAGACGCAGGAGG-CGCCCCACTTTCTACTTTTC-GAGATGACAAGCGAAACGAG-CTATTCCTTCTCCGTGCTCA-CAACAATAAGACGCAGGAGG-TCTTATCCACTCCCCTTCCT-CAACAATAAGACGCAGGAGG-TACTTCCTCCGTTTTCCTGG-GAGCAAAGCGAACAGTAGAG-CATTCCCTTCCTGCTTACCT
+                                                            <--3' CTCTACTGTTCGCTTTGCTC                   3' GTTGTTATTCTGCGTCCTCC                   3' CTCTACTGTTCGCTTTGCTC                   3' GTTGTTATTCTGCGTCCTCC                   3' GTTGTTATTCTGCGTCCTCC                   3' CTCTACTGTTCGCTTTGCTC                                        
+5' AGCTTTACTCCCTTCCCTTC-->                                                                                                                                                                                                                                                           *** tego nie ma ***
+3' TCGAAATGAGGGAAGGGAAG-GGAGGACGCAGAATAACAAC-GGACAACGGGAAGAGAGATT-CTCTACTGTTCGCTTTGCTC-AGTAGGAAAGGGAGGGTTAG-GTTGTTATTCTGCGTCCTCC-GCGGGGTGAAAGATGAAAAG-CTCTACTGTTCGCTTTGCTC-GATAAGGAAGAGGCACGAGT-GTTGTTATTCTGCGTCCTCC-AGAATAGGTGAGGGGAAGGA-GTTGTTATTCTGCGTCCTCC-ATGAAGGAGGCAAAAGGACC-CTCGTTTCGCTTGTCATCTC-GTAAGGGAAGGACGAATGGA
+  |--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------| 
+```                                                                6 0                                                            120                                                            180                                                            240                                                            300
+
+Prawdopodobny wynik odczytu - brak ostatniego bitu
+
+```
+A B A B B
+
+220        B
+180        B
+140    A
+100        B
+ 60    A
+```
+
+Wnioski:
+Konieczne
+  * poprawienie środkowego fragmentu w I komponencie
+  * poparwienei wzorca bitu w 7 komponencie 
+
+## koniec 2.12.2020
+
+## Aktualizacja 5.12.2020 
+
+Zmiana w oparciu o wyniki z primer3
+
+Poniżej czysty tekst wyjściowy z Primer3:
+
+```
+No mispriming library specified
+Using 1-based sequence positions
+OLIGO            start  len      tm     gc%   any    3' seq 
+LEFT PRIMER          1   20   59.97   55.00  2.00  0.00 TTACTCCCTTCCCTTCCCCA
+RIGHT PRIMER        80   20   59.21   60.00  4.00  0.00 CTCTCCATGCTCCTGGTCTC
+SEQUENCE SIZE: 380
+INCLUDED REGION SIZE: 380
+
+PRODUCT SIZE: 80, PAIR ANY COMPL: 3.00, PAIR 3' COMPL: 0.00
+
+    1 TTACTCCCTTCCCTTCCCCATCGTTCTACTTCCCCTCCTTCCTGTTGCCCTTCTCTCTAA
+      >>>>>>>>>>>>>>>>>>>>                                        
+   61 GAGACCAGGAGCATGGAGAGTCATCCTTTCCCTCCCAATCGCTGTCGCGTATAGGGATGT
+      <<<<<<<<<<<<<<<<<<<<                                        
+  121 CGCCCCACTTTCTACTTTTCGAGACCAGGAGCATGGAGAGCTATTCCTTCTCCGTGCTCA
+  181 GCTGTCGCGTATAGGGATGTTCTTATCCACTCCCCTTCCTGCTGTCGCGTATAGGGATGT
+  241 TACTTCCTCCGTTTTCCTGGGAGACCAGGAGCATGGAGAGCATTCCCTTCCTGCTTACCT
+  301 GCTGTCGCGTATAGGGATGTATGTTTCCTTCTCCTCGTCCGAGACCAGGAGCATGGAGAG
+  361 GTCCTTCCTTCTTCCCGATT
+KEYS (in order of precedence):
+>>>>>> left primer
+<<<<<< right primer
+ADDITIONAL OLIGOS
+                    start  len      tm     gc%   any    3' seq 
+ 1 LEFT PRIMER          1   20   59.97   55.00  2.00  0.00 TTACTCCCTTCCCTTCCCCA
+   RIGHT PRIMER       160   20   59.21   60.00  4.00  0.00 CTCTCCATGCTCCTGGTCTC
+   PRODUCT SIZE: 160, PAIR ANY COMPL: 3.00, PAIR 3' COMPL: 0.00
+
+ 2 LEFT PRIMER          1   20   59.97   55.00  2.00  0.00 TTACTCCCTTCCCTTCCCCA
+   RIGHT PRIMER       280   20   59.21   60.00  4.00  0.00 CTCTCCATGCTCCTGGTCTC
+   PRODUCT SIZE: 280, PAIR ANY COMPL: 3.00, PAIR 3' COMPL: 0.00
+
+ 3 LEFT PRIMER          1   20   59.97   55.00  2.00  0.00 TTACTCCCTTCCCTTCCCCA
+   RIGHT PRIMER       360   20   59.21   60.00  4.00  0.00 CTCTCCATGCTCCTGGTCTC
+   PRODUCT SIZE: 360, PAIR ANY COMPL: 3.00, PAIR 3' COMPL: 0.00
+Statistics
+Pair Stats:
+considered 16, unacceptable product size 12, ok 4
+```
+
+
+```
+OLIGO            start  len      tm     gc%   any    3' seq 
+LEFT PRIMER          1   20   75.21   55.00  2.00  0.00 TTACTCCCTTCCCTTCCCCA
+RIGHT PRIMER       200   20   72.40   55.00  4.00  2.00 ACATCCCTATACGCGACAGC
+SEQUENCE SIZE: 380
+INCLUDED REGION SIZE: 380
+
+PRODUCT SIZE: 200, PAIR ANY COMPL: 2.00, PAIR 3' COMPL: 0.00
+
+    1 TTACTCCCTTCCCTTCCCCATCGTTCTACTTCCCCTCCTTCCTGTTGCCCTTCTCTCTAA
+      >>>>>>>>>>>>>>>>>>>>                                        
+   61 GAGACCAGGAGCATGGAGAGTCATCCTTTCCCTCCCAATCGCTGTCGCGTATAGGGATGT                                                              
+  121 CGCCCCACTTTCTACTTTTCGAGACCAGGAGCATGGAGAGCTATTCCTTCTCCGTGCTCA                                                                  
+  181 GCTGTCGCGTATAGGGATGTTCTTATCCACTCCCCTTCCTGCTGTCGCGTATAGGGATGT
+      <<<<<<<<<<<<<<<<<<<<                                        
+  241 TACTTCCTCCGTTTTCCTGGGAGACCAGGAGCATGGAGAGCATTCCCTTCCTGCTTACCT                                                                  
+  301 GCTGTCGCGTATAGGGATGTATGTTTCCTTCTCCTCGTCCGAGACCAGGAGCATGGAGAG                                                                
+  361 GTCCTTCCTTCTTCCCGATT                      
+
+KEYS (in order of precedence):
+>>>>>> left primer
+<<<<<< right primer
+
+ADDITIONAL OLIGOS
+                    start  len      tm     gc%   any    3' seq 
+
+ 1 LEFT PRIMER          1   20   75.21   55.00  2.00  0.00 TTACTCCCTTCCCTTCCCCA
+   RIGHT PRIMER       240   20   72.40   55.00  4.00  2.00 ACATCCCTATACGCGACAGC
+   PRODUCT SIZE: 240, PAIR ANY COMPL: 2.00, PAIR 3' COMPL: 0.00
+
+ 2 LEFT PRIMER          1   20   75.21   55.00  2.00  0.00 TTACTCCCTTCCCTTCCCCA
+   RIGHT PRIMER       120   20   72.40   55.00  4.00  2.00 ACATCCCTATACGCGACAGC
+   PRODUCT SIZE: 120, PAIR ANY COMPL: 2.00, PAIR 3' COMPL: 0.00
+
+ 3 LEFT PRIMER          1   20   75.21   55.00  2.00  0.00 TTACTCCCTTCCCTTCCCCA
+   RIGHT PRIMER       320   20   72.40   55.00  4.00  2.00 ACATCCCTATACGCGACAGC
+   PRODUCT SIZE: 320, PAIR ANY COMPL: 2.00, PAIR 3' COMPL: 0.00
+
+Statistics
+Pair Stats:
+considered 32, unacceptable product size 26, ok 6
+```
+
+Sprwdzenie poparwności dla wyników z primera3:
+
+```
+5' TTACTCCCTTCCCTTCCCCATCGTTCTACTTCCCCTCCTTCCTGTTGCCCTTCTCTCTAAGAGACCAGGAGCATGGAGAGTCATCCTTTCCCTCCCAATCGCTGTCGCGTATAGGGATGTCGCCCCACTTTCTACTTTTCGAGACCAGGAGCATGGAGAGCTATTCCTTCTCCGTGCTCAGCTGTCGCGTATAGGGATGTTCTTATCCACTCCCCTTCCTGCTGTCGCGTATAGGGATGTTACTTCCTCCGTTTTCCTGGGAGACCAGGAGCATGGAGAGCATTCCCTTCCTGCTTACCTGCTGTCGCGTATAGGGATGTATGTTTCCTTCTCCTCGTCCGAGACCAGGAGCATGGAGAGGTCCTTCCTTCTTCCCGATT
+5' TTACTCCCTTCCCTTCCCCATCGTTCTACTTCCCCTCCTTCCTGTTGCCCTTCTCTCTAAGAGACCAGGAGCATGGAGAGTCATCCTTTCCCTCCCAATCGCTGTCGCGTATAGGGATGTCGCCCCACTTTCTACTTTTCGAGACCAGGAGCATGGAGAGCTATTCCTTCTCCGTGCTCAGCTGTCGCGTATAGGGATGTTCTTATCCACTCCCCTTCCTGCTGTCGCGTATAGGGATGTTACTTCCTCCGTTTTCCTGGGAGACCAGGAGCATGGAGAGCATTCCCTTCCTGCTTACCTGCTGTCGCGTATAGGGATGTATGTTTCCTTCTCCTCGTCCGAGACCAGGAGCATGGAGAGGTCCTTCCTTCTTCCCGATT
+```
+
+Nici komplementarne:
+  
+5' TTACTCCCTTCCCTTCCCCA-TCGTTCTACTTCCCCTCCTT-CCTGTTGCCCTTCTCTCTAA-GAGACCAGGAGCATGGAGAG-TCATCCTTTCCCTCCCAATC-GCTGTCGCGTATAGGGATGT-CGCCCCACTTTCTACTTTTC-GAGACCAGGAGCATGGAGAG-CTATTCCTTCTCCGTGCTCA-GCTGTCGCGTATAGGGATGT-TCTTATCCACTCCCCTTCCT-GCTGTCGCGTATAGGGATGT-TACTTCCTCCGTTTTCCTGG-GAGACCAGGAGCATGGAGAG-CATTCCCTTCCTGCTTACCT-GCTGTCGCGTATAGGGATGT-ATGTTTCCTTCTCCTCGTCC-GAGACCAGGAGCATGGAGAG-GTCCTTCCTTCTTCCCGATT
+  |--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+  0                   2 0                  4 0                  6 0                  8 0                  100                  120                  140                  160                  180                  200                  220                  240                  260                  280                  300                  320                  340                  360                  380                                  
+  |--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+3' AATGAGGGAAGGGAAGGGGT-AGCAAGATGAAGGGGAGGAA-GGACAACGGGAAGAGAGATT-CTCTGGTCCTCGTACCTCTC-AGTAGGAAAGGGAGGGTTAG-CGACAGCGCATATCCCTACA-GCGGGGTGAAAGATGAAAAG-CTCTGGTCCTCGTACCTCTC-GATAAGGAAGAGGCACGAGT-CGACAGCGCATATCCCTACA-AGAATAGGTGAGGGGAAGGA-CGACAGCGCATATCCCTACA-ATGAAGGAGGCAAAAGGACC-CTCTGGTCCTCGTACCTCTC-GTAAGGGAAGGACGAATGGA-CGACAGCGCATATCCCTACA-TACAAAGGAAGAGGAGCAGG-CTCTGGTCCTCGTACCTCTC-CAGGAAGGAAGAAGGGCTAA
+
+Czysta nić 5'
+
+
+
+starter = "TTACTCCCTTCCCTTCCCCA"
+bit_1 = "GAGACCAGGAGCATGGAGAG"
+bit_0 = "GCTGTCGCGTATAGGGATGT"
+ender = ""
+
+# Fragmenty (porządek 5'):
+
+c_1 = "TTACTCCCTTCCCTTCCCCA-TCGTTCTACTTCCCCTCCTT-CCTGTTGCCCTTCTCTCTAA"    
+c_2 = "CCTGTTGCCCTTCTCTCTAA-GAGACCAGGAGCATGGAGAG-TCATCCTTTCCCTCCCAATC"    1
+c_3 = "TCATCCTTTCCCTCCCAATC-GCTGTCGCGTATAGGGATGT-CGCCCCACTTTCTACTTTTC"    0
+c_4 = "CGCCCCACTTTCTACTTTTC-GAGACCAGGAGCATGGAGAG-CTATTCCTTCTCCGTGCTCA"    1
+c_5 = "CTATTCCTTCTCCGTGCTCA-GCTGTCGCGTATAGGGATGT-TCTTATCCACTCCCCTTCCT"    0
+c_6 = "TCTTATCCACTCCCCTTCCT-GCTGTCGCGTATAGGGATGT-TACTTCCTCCGTTTTCCTGG"    0
+c_7 = "TACTTCCTCCGTTTTCCTGG-GAGACCAGGAGCATGGAGAG-CATTCCCTTCCTGCTTACCT"    1
+c_8 = "CATTCCCTTCCTGCTTACCT-GCTGTCGCGTATAGGGATGT-ATGTTTCCTTCTCCTCGTCC"    0
+c_9 = "ATGTTTCCTTCTCCTCGTCC-GAGACCAGGAGCATGGAGAG-GTCCTTCCTTCTTCCCGATT"    1
+
+
+# 6.12.2020
+# Konsrtukcja oligo - to jest do zamówienia:
+# porządek 5'
+
+d_1 = "TTACTCCCTTCCCTTCCCCA-TCGTTCTACTTCCCCTCCTT-CCTGTTGCCCTTCTCTCTAA"
+d_2 = "GATTGGGAGGGAAAGGATGA-CTCTCCATGCTCCTGGTCTC-TTAGAGAGAAGGGCAACAGG" *
+d_3 = "TCATCCTTTCCCTCCCAATC-GCTGTCGCGTATAGGGATGT-CGCCCCACTTTCTACTTTTC"
+d_4 = "TGAGCACGGAGAAGGAATAG-CTCTCCATGCTCCTGGTCTC-GAAAAGTAGAAAGTGGGGCG" *
+d_5 = "CTATTCCTTCTCCGTGCTCA-GCTGTCGCGTATAGGGATGT-TCTTATCCACTCCCCTTCCT"
+d_6 = "CCAGGAAAACGGAGGAAGTA-ACATCCCTATACGCGACAGC-AGGAAGGGGAGTGGATAAGA" *
+d_7 = "TACTTCCTCCGTTTTCCTGG-GAGACCAGGAGCATGGAGAG-CATTCCCTTCCTGCTTACCT"
+d_8 = "GGACGAGGAGAAGGAAACAT-ACATCCCTATACGCGACAGC-AGGTAAGCAGGAAGGGAATG" * 
+d_9 = "ATGTTTCCTTCTCCTCGTCC-GAGACCAGGAGCATGGAGAG-GTCCTTCCTTCTTCCCGATT"
+
+# primery:
+# porządek 5'
+
+starter =   "TTACTCCCTTCCCTTCCCCA"
+bit_1 =     "CTCTCCATGCTCCTGGTCTC" OK --> 3' CTCTGGTCCTCGTACCTCTC
+bit_0 =     "ACATCCCTATACGCGACAGC" OK --> 3' CGACAGCGCATATCCCTACA
+
+# SPRAWDZENIE
+
+  0                   2 0                  4 0                  6 0                  8 0                  100                  120                  140                  160                  180                  200                  220                  240                  260                  280                  300                  320                  340                  360                  380                                  
+  |--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|
+5' TTACTCCCTTCCCTTCCCCA-TCGTTCTACTTCCCCTCCTT-CCTGTTGCCCTTCTCTCTAA                      TCATCCTTTCCCTCCCAATC-GCTGTCGCGTATAGGGATGT-CGCCCCACTTTCTACTTTTC                      CTATTCCTTCTCCGTGCTCA-GCTGTCGCGTATAGGGATGT-TCTTATCCACTCCCCTTCCT                      TACTTCCTCCGTTTTCCTGG-GAGACCAGGAGCATGGAGAG-CATTCCCTTCCTGCTTACCT                      ATGTTTCCTTCTCCTCGTCC-GAGACCAGGAGCATGGAGAG-GTCCTTCCTTCTTCCCGATT
+3'                                           GGACAACGGGAAGAGAGATT-CTCTGGTCCTCGTACCTCTC-AGTAGGAAAGGGAGGGTTAG                      GCGGGGTGAAAGATGAAAAG-CTCTGGTCCTCGTACCTCTC-GATAAGGAAGAGGCACGAGT                      AGAATAGGTGAGGGGAAGGA-CGACAGCGCATATCCCTACA-ATGAAGGAGGCAAAAGGACC                      GTAAGGGAAGGACGAATGGA-CGACAGCGCATATCCCTACA-TACAAAGGAAGAGGAGCAGG                
+  |--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+  0                   2 0                  4 0                  6 0                  8 0                  100                  120                  140                  160                  180                  200                  220                  240                  260                  280                  300                  320                  340                  360                  380                                  
+                                                                  CTCTGGTCCTCGTACCTCTC                      CGACAGCGCATATCCCTACA                      CTCTGGTCCTCGTACCTCTC                      CGACAGCGCATATCCCTACA                      CGACAGCGCATATCCCTACA                      CTCTGGTCCTCGTACCTCTC                      CGACAGCGCATATCCCTACA                      CTCTGGTCCTCGTACCTCTC
+  |--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+  0                   2 0                  4 0                  6 0                  8 0                  100                  120                  140                  160                  180                  200                  220                  240                  260                  280                  300                  320                  340                  360                  380                                  
+                                                                            1                                       0                                           1                                       0                                           0                                         1                                         0                                         1
+  
+  
+# 9.12.2020
+# Zmiana osooatniego fragmentu
+
+GTCCTTCCTTCTTCCCGATT --> GCATACCAACCTCCCACATA
+
+zatem:
+
+d_9 = "ATGTTTCCTTCTCCTCGTCC-GAGACCAGGAGCATGGAGAG-GCATACCAACCTCCCACATA"
+
+5' ->
+starter = "TTACTCCCTTCCCTTCCCCA"
+ender =   "TATGTGGGAGGTTGGTATGC" -> 3' "CGTATGGTTGGAGGGTGTAT"
+
+  0                   2 0                  4 0                  6 0                  8 0                  100                  120                  140                  160                  180                  200                  220                  240                  260                  280                  300                  320                  340                  360                  380                                  
+  |--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|====================|--------------------|
+5' TTACTCCCTTCCCTTCCCCA-TCGTTCTACTTCCCCTCCTT-CCTGTTGCCCTTCTCTCTAA                      TCATCCTTTCCCTCCCAATC-GCTGTCGCGTATAGGGATGT-CGCCCCACTTTCTACTTTTC                      CTATTCCTTCTCCGTGCTCA-GCTGTCGCGTATAGGGATGT-TCTTATCCACTCCCCTTCCT                      TACTTCCTCCGTTTTCCTGG-GAGACCAGGAGCATGGAGAG-CATTCCCTTCCTGCTTACCT                      ATGTTTCCTTCTCCTCGTCC-GAGACCAGGAGCATGGAGAG-GCATACCAACCTCCCACATA
+3'                                           GGACAACGGGAAGAGAGATT-CTCTGGTCCTCGTACCTCTC-AGTAGGAAAGGGAGGGTTAG                      GCGGGGTGAAAGATGAAAAG-CTCTGGTCCTCGTACCTCTC-GATAAGGAAGAGGCACGAGT                      AGAATAGGTGAGGGGAAGGA-CGACAGCGCATATCCCTACA-ATGAAGGAGGCAAAAGGACC                      GTAAGGGAAGGACGAATGGA-CGACAGCGCATATCCCTACA-TACAAAGGAAGAGGAGCAGG                
+  |--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+5' TTACTCCCTTCCCTTCCCCA                                                                                                                                                                                                                                                                                                                                                                   3' CGTATGGTTGGAGGGTGTAT
+  |--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+  0                   2 0                  4 0                  6 0                  8 0                  100                  120                  140                  160                  180                  200                  220                  240                  260                  280                  300                  320                  340                  360                  380                                  
+
+# zamówione 9.12.2020 ! (zęby rekina)
+

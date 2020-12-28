@@ -33,7 +33,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="title_page">
      <property name="geometry">
@@ -41,7 +41,7 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>467</height>
+       <height>487</height>
       </rect>
      </property>
      <attribute name="label">
@@ -141,7 +141,7 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>467</height>
+       <height>487</height>
       </rect>
      </property>
      <attribute name="label">
@@ -491,7 +491,7 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>467</height>
+       <height>487</height>
       </rect>
      </property>
      <attribute name="label">
@@ -843,12 +843,84 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>467</height>
+       <height>487</height>
       </rect>
      </property>
      <attribute name="label">
       <string>Selector</string>
      </attribute>
+     <widget class="QWidget" name="formLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>361</width>
+        <height>301</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_4">
+       <property name="verticalSpacing">
+        <number>10</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="selector_input_button">
+         <property name="text">
+          <string>Input file</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="selector_input_edit"/>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>Preview</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="selector_chosen_primer_label">
+         <property name="text">
+          <string>Chosen primer:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="selector_chosen_primer_edit"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="rowCount">
+          <number>5</number>
+         </property>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <column>
+          <property name="text">
+           <string>Parameter</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Include</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Order</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
     <widget class="QWidget" name="composer_page">
      <property name="geometry">
@@ -856,12 +928,61 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>467</height>
+       <height>487</height>
       </rect>
      </property>
      <attribute name="label">
       <string>Composer</string>
      </attribute>
+     <widget class="QWidget" name="formLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>351</width>
+        <height>153</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <property name="labelAlignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="verticalSpacing">
+        <number>10</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="bits_label">
+         <property name="text">
+          <string>Bits:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPlainTextEdit" name="bits_content">
+         <property name="placeholderText">
+          <string>01011011</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="composer_output_button">
+         <property name="text">
+          <string>Output file</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="composer_output_edit"/>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QPushButton" name="composer_run_button">
+         <property name="text">
+          <string>Compose</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>

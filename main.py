@@ -2,6 +2,8 @@
 #
 import sys
 import os
+from typing import Dict, Callable, List, Union
+
 import primer3
 import random
 
@@ -14,10 +16,9 @@ from ui_csv_viewer import Ui_CSV_Viewer
 # Generator variables
 # Global variables for primers
 number_of_primers = 1000  # number of primers
-length_of_primer = 20  # length of primer  # noqa: E741
+length_of_primer = 20  # length of primer
 
 gen_file_name = ""  # where to store generated primers
-csv_file_name = ""  # csv file with primers to analyze
 path = os.getcwd()  # ...
 tm_trigger = True
 tm_min = 58.0
@@ -42,6 +43,36 @@ pnc = 50.0
 number_of_lines = 0
 
 
+class FileSelectHelper:
+    data: Dict = {}
+
+    def __init__(self, bits: "Bits"):
+        self.bits = bits
+
+    def select_file(self, name: str) -> None:
+        d = self.data[name]
+
+        d['text'], _ = QFileDialog.getOpenFileName(
+            self.bits,
+            "Generator Load File", "",
+            ";;".join([f"{t} files (*.{t})" for t in d['types']]) + ";;All Files (*)"
+        )
+
+        d['label'].setText(d['text'].split('/')[-1])
+        if d['f']:
+            d['f']()
+
+    def add_file_handler(self, name: str, button, label, types: Union[str, List[str]] = None, f: Callable = None):
+        if isinstance(types, str):
+            types = [types]
+
+        self.data[name] = {'label': label, 'text': "", 'f': f, 'types': types or []}
+        button.clicked.connect(lambda: self.select_file(name))
+
+    def __getitem__(self, item):
+        return self.data[item]['text']
+
+
 class CSV_Viewer(QWidget, Ui_CSV_Viewer):
     def __init__(self):
         super(CSV_Viewer, self).__init__()
@@ -52,11 +83,6 @@ class Bits(QMainWindow, Ui_Bits):
     def __init__(self):
         super(Bits, self).__init__()
         self.setupUi(self)
-
-        self.generator_out_file_lineEdit.textChanged.connect(
-            self.gen_file_name_changed)
-        self.generator_out_file_pushButton.clicked.connect(
-            self.gen_file_name_choose)
 
         self.primers_length_spinBox.valueChanged.connect(self.primers_length)
         self.number_of_primers_spinBox.valueChanged.connect(
@@ -73,17 +99,22 @@ class Bits(QMainWindow, Ui_Bits):
         self.runs_checkBox.stateChanged.connect(self.runs_set)
         self.repeats_checkBox.stateChanged.connect(self.repeats_set)
 
-        self.start_pushButton.clicked.connect(self.start_generate)
+        self.generator_start_button.clicked.connect(self.start_generate)
 
-        self.file_in_pushButton.clicked.connect(self.load_file)
-        self.file_out_pushButton.clicked.connect(self.save_file)
-        self.file_out_lineEdit.textChanged.connect(self.save_lineEdit)
         self.sequence_id_lineEdit.textChanged.connect(self.sequenceID_edit)
         self.generate_pushButton.clicked.connect(self.primer3_input_generator)
         self.run_pr3_pushButton.clicked.connect(primer3_run)
         self.generate_csv_pushButton.clicked.connect(csv_generator)
-        self.load_csv_pushButton.clicked.connect(self.csv_load)
-        self.csv_preview_pushButton.clicked.connect(self.csv_preview)
+
+        self.selector_preview_button.clicked.connect(self.csv_preview)
+
+        # file selectors
+        self.fsh = FileSelectHelper(self)
+        self.fsh.add_file_handler("generator_output", self.generator_output_button, self.generator_output_edit, 'txt')
+        self.fsh.add_file_handler("formatter_input", self.formatter_input_button, self.formatter_input_edit)
+        self.fsh.add_file_handler("formatter_output", self.formatter_output_button, self.formatter_output_edit)
+        self.fsh.add_file_handler("selector_input", self.selector_input_button, self.selector_input_edit, 'csv')
+        self.fsh.add_file_handler("composer_output", self.composer_output_button, self.composer_output_edit)
 
     def gen_file_name_changed(self):
         global gen_file_name
@@ -146,7 +177,7 @@ class Bits(QMainWindow, Ui_Bits):
         window.generate_progressBar.reset()
         randomizer()
 
-# --- formater methods ---
+# --- formatter methods ---
 
     def load_file(self):
         global primer_input_file_name
@@ -179,16 +210,8 @@ class Bits(QMainWindow, Ui_Bits):
         window.generate_pri_progressBar.reset()
         primer3_input()
 
-    def csv_load(self):
-        global csv_file_name
-        csv_file_name, _ = QFileDialog.getOpenFileName(
-            self, "CSV Load File", "",
-            "All Files (*);; Csv files (*.csv)")
-        self.generator_out_file_lineEdit.setText(gen_file_name.split('/')[-1])
-
     def csv_preview(self):
-        global csv_file_name
-        csv = open(csv_file_name, "r")
+        csv = open(self.fsh['selector_input'], "r")
         header = csv.readline().split(",")
         header[-1] = header[-1][0:-1]
         column = 0
@@ -212,7 +235,7 @@ class Bits(QMainWindow, Ui_Bits):
 
 def lines_counter(file_name):
     file = open(file_name, "r")
-    tmp = sum(1 for i in file)
+    tmp = sum(1 for _ in file)
     file.close()
     return tmp
 
@@ -302,8 +325,7 @@ def primer3_input():
         output_file.write("SEQUENCE_PRIMER=" + primer)
         output_file.write("=\n")
         app.processEvents()
-        window.generate_pri_progressBar.setValue(
-            int(counter / number_of_lines * 100))
+        window.generate_pri_progressBar.setValue(int(counter / number_of_lines * 100))
         counter += 1
     output_file.close()
     input_file.close()

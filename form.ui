@@ -33,7 +33,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="title_page">
      <property name="geometry">
@@ -147,106 +147,6 @@
      <attribute name="label">
       <string>Generator</string>
      </attribute>
-     <widget class="QGroupBox" name="primers_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>36</y>
-        <width>330</width>
-        <height>100</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Primers</string>
-      </property>
-      <widget class="QLabel" name="primers_length_2">
-       <property name="geometry">
-        <rect>
-         <x>25</x>
-         <y>35</y>
-         <width>59</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Length:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="numbers_of_primers">
-       <property name="geometry">
-        <rect>
-         <x>25</x>
-         <y>65</y>
-         <width>126</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Number of Primers:</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="primers_length_spinBox">
-       <property name="geometry">
-        <rect>
-         <x>251</x>
-         <y>30</y>
-         <width>66</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-       <property name="value">
-        <number>20</number>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="number_of_primers_spinBox">
-       <property name="geometry">
-        <rect>
-         <x>251</x>
-         <y>60</y>
-         <width>66</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-       <property name="maximum">
-        <number>1000000000</number>
-       </property>
-       <property name="singleStep">
-        <number>200</number>
-       </property>
-       <property name="value">
-        <number>1000</number>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QPushButton" name="generator_out_file_pushButton">
-      <property name="geometry">
-       <rect>
-        <x>12</x>
-        <y>0</y>
-        <width>113</width>
-        <height>32</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Output file</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="generator_out_file_lineEdit">
-      <property name="geometry">
-       <rect>
-        <x>136</x>
-        <y>2</y>
-        <width>199</width>
-        <height>25</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QGroupBox" name="temp_groupBox">
       <property name="geometry">
        <rect>
@@ -416,9 +316,9 @@
      <widget class="QGroupBox" name="parameters_groupBox">
       <property name="geometry">
        <rect>
-        <x>15</x>
+        <x>20</x>
         <y>370</y>
-        <width>176</width>
+        <width>331</width>
         <height>66</height>
        </rect>
       </property>
@@ -428,7 +328,7 @@
       <widget class="QCheckBox" name="runs_checkBox">
        <property name="geometry">
         <rect>
-         <x>15</x>
+         <x>30</x>
          <y>30</y>
          <width>61</width>
          <height>20</height>
@@ -444,7 +344,7 @@
       <widget class="QCheckBox" name="repeats_checkBox">
        <property name="geometry">
         <rect>
-         <x>85</x>
+         <x>100</x>
          <y>30</y>
          <width>86</width>
          <height>20</height>
@@ -458,31 +358,130 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="start_pushButton">
+     <widget class="QGroupBox" name="primers_groupBox">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>390</y>
-        <width>113</width>
-        <height>32</height>
+        <x>20</x>
+        <y>40</y>
+        <width>330</width>
+        <height>100</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Start</string>
+      <property name="title">
+       <string>Primers</string>
       </property>
+      <widget class="QLabel" name="primers_length_2">
+       <property name="geometry">
+        <rect>
+         <x>25</x>
+         <y>35</y>
+         <width>59</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Length:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="numbers_of_primers">
+       <property name="geometry">
+        <rect>
+         <x>25</x>
+         <y>65</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Number of Primers:</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="primers_length_spinBox">
+       <property name="geometry">
+        <rect>
+         <x>251</x>
+         <y>30</y>
+         <width>66</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="value">
+        <number>20</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="number_of_primers_spinBox">
+       <property name="geometry">
+        <rect>
+         <x>251</x>
+         <y>60</y>
+         <width>66</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="maximum">
+        <number>1000000000</number>
+       </property>
+       <property name="singleStep">
+        <number>200</number>
+       </property>
+       <property name="value">
+        <number>1000</number>
+       </property>
+      </widget>
      </widget>
-     <widget class="QProgressBar" name="generate_progressBar_3">
+     <widget class="QWidget" name="formLayoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>202</x>
-        <y>415</y>
-        <width>151</width>
-        <height>23</height>
+        <x>20</x>
+        <y>10</y>
+        <width>331</width>
+        <height>21</height>
        </rect>
       </property>
-      <property name="value">
-       <number>24</number>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="generator_output_button">
+         <property name="text">
+          <string>Output file</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="generator_output_edit"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>460</y>
+        <width>331</width>
+        <height>31</height>
+       </rect>
       </property>
+      <layout class="QFormLayout" name="formLayout_2">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="generator_start_button">
+         <property name="text">
+          <string>Start</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QProgressBar" name="generate_progress_bar">
+         <property name="value">
+          <number>24</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="formater_page">
@@ -495,155 +494,12 @@
       </rect>
      </property>
      <attribute name="label">
-      <string>Formater</string>
+      <string>Formatter</string>
      </attribute>
-     <widget class="QPushButton" name="csv_preview_pushButton">
-      <property name="geometry">
-       <rect>
-        <x>190</x>
-        <y>390</y>
-        <width>121</width>
-        <height>32</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>CSV preview</string>
-      </property>
-     </widget>
-     <widget class="QProgressBar" name="generate_progressBar">
-      <property name="geometry">
-       <rect>
-        <x>232</x>
-        <y>270</y>
-        <width>118</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_csv_pushButton">
-      <property name="geometry">
-       <rect>
-        <x>22</x>
-        <y>350</y>
-        <width>201</width>
-        <height>32</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Generate CSV file</string>
-      </property>
-     </widget>
-     <widget class="QProgressBar" name="generate_csv_progressBar">
-      <property name="geometry">
-       <rect>
-        <x>232</x>
-        <y>350</y>
-        <width>118</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="file_in_label">
-      <property name="geometry">
-       <rect>
-        <x>152</x>
-        <y>10</y>
-        <width>191</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>input file name</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="run_pr3_pushButton">
-      <property name="geometry">
-       <rect>
-        <x>22</x>
-        <y>311</y>
-        <width>131</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Run Primer3</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="sequence_id_lineEdit">
-      <property name="geometry">
-       <rect>
-        <x>117</x>
-        <y>80</y>
-        <width>236</width>
-        <height>21</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="sequence_id_label">
-      <property name="geometry">
-       <rect>
-        <x>22</x>
-        <y>80</y>
-        <width>111</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Sequence ID:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="file_out_lineEdit">
-      <property name="geometry">
-       <rect>
-        <x>172</x>
-        <y>45</y>
-        <width>181</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="file_in_pushButton">
-      <property name="geometry">
-       <rect>
-        <x>12</x>
-        <y>10</y>
-        <width>113</width>
-        <height>32</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Input file</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_pushButton">
-      <property name="geometry">
-       <rect>
-        <x>22</x>
-        <y>270</y>
-        <width>201</width>
-        <height>32</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Generate Primer3 input</string>
-      </property>
-     </widget>
      <widget class="QGroupBox" name="primer3_param_groupBox">
       <property name="geometry">
        <rect>
-        <x>22</x>
+        <x>20</x>
         <y>110</y>
         <width>330</width>
         <height>150</height>
@@ -781,60 +637,108 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="file_out_pushButton">
+     <widget class="QWidget" name="formLayoutWidget_5">
       <property name="geometry">
        <rect>
-        <x>12</x>
-        <y>40</y>
-        <width>113</width>
-        <height>31</height>
+        <x>20</x>
+        <y>10</y>
+        <width>331</width>
+        <height>80</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Output file</string>
-      </property>
+      <layout class="QFormLayout" name="formLayout_3">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="formatter_input_button">
+         <property name="text">
+          <string>Input file</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="formatter_output_button">
+         <property name="text">
+          <string>Output file</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="formatter_output_edit">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="sequence_id_label">
+         <property name="text">
+          <string>Sequence ID:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="sequence_id_lineEdit"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="formatter_input_edit"/>
+       </item>
+      </layout>
      </widget>
-     <widget class="QPushButton" name="load_csv_pushButton">
+     <widget class="QWidget" name="formLayoutWidget_6">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>390</y>
-        <width>121</width>
-        <height>32</height>
+        <x>20</x>
+        <y>270</y>
+        <width>331</width>
+        <height>80</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Load CSV</string>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>295</y>
-        <width>191</width>
-        <height>46</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Primer3 output file:</string>
-      </property>
-      <widget class="QLabel" name="primer3_out_file_name_label">
-       <property name="geometry">
-        <rect>
-         <x>5</x>
-         <y>20</y>
-         <width>171</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>output file</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
+      <layout class="QFormLayout" name="formLayout_4">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="generate_pushButton">
+         <property name="text">
+          <string>Generate Primer3 input</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QProgressBar" name="generate_progressBar">
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="run_pr3_pushButton">
+         <property name="text">
+          <string>Run Primer3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="generate_csv_pushButton">
+         <property name="text">
+          <string>Generate CSV file</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QProgressBar" name="generate_csv_progressBar">
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="placeholderText">
+          <string>output file</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="selector_page">

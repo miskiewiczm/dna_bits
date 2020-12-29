@@ -32,4 +32,3 @@ class Ui_CSV_Viewer(object):
             "CSV_Viewer", u"CSV_Viewer", None))
 
     # retranslateUi
-

@@ -3,16 +3,13 @@
 ################################################################################
 ## Form generated from reading UI file 'form.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.0
+## Created by: Qt User Interface Compiler version 5.15.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
-    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
-    QPixmap, QRadialGradient)
+from PySide2.QtCore import *
+from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 
@@ -34,7 +31,7 @@ class Ui_Bits(object):
         self.toolBox.setGeometry(QRect(25, 18, 373, 637))
         self.title_page = QWidget()
         self.title_page.setObjectName(u"title_page")
-        self.title_page.setGeometry(QRect(0, 0, 373, 467))
+        self.title_page.setGeometry(QRect(0, 0, 373, 487))
         self.title_up_line = QFrame(self.title_page)
         self.title_up_line.setObjectName(u"title_up_line")
         self.title_up_line.setGeometry(QRect(20, 65, 331, 21))
@@ -69,7 +66,7 @@ class Ui_Bits(object):
         self.toolBox.addItem(self.title_page, u"Title")
         self.genrator_page = QWidget()
         self.genrator_page.setObjectName(u"genrator_page")
-        self.genrator_page.setGeometry(QRect(0, 0, 373, 467))
+        self.genrator_page.setGeometry(QRect(0, 0, 373, 487))
         self.primers_groupBox = QGroupBox(self.genrator_page)
         self.primers_groupBox.setObjectName(u"primers_groupBox")
         self.primers_groupBox.setGeometry(QRect(20, 36, 330, 100))
@@ -164,7 +161,7 @@ class Ui_Bits(object):
         self.toolBox.addItem(self.genrator_page, u"Generator")
         self.formater_page = QWidget()
         self.formater_page.setObjectName(u"formater_page")
-        self.formater_page.setGeometry(QRect(0, 0, 373, 467))
+        self.formater_page.setGeometry(QRect(0, 0, 373, 487))
         self.csv_preview_pushButton = QPushButton(self.formater_page)
         self.csv_preview_pushButton.setObjectName(u"csv_preview_pushButton")
         self.csv_preview_pushButton.setGeometry(QRect(190, 390, 121, 32))
@@ -257,11 +254,93 @@ class Ui_Bits(object):
         self.toolBox.addItem(self.formater_page, u"Formater")
         self.selector_page = QWidget()
         self.selector_page.setObjectName(u"selector_page")
-        self.selector_page.setGeometry(QRect(0, 0, 373, 467))
+        self.selector_page.setGeometry(QRect(0, 0, 373, 487))
+        self.formLayoutWidget_2 = QWidget(self.selector_page)
+        self.formLayoutWidget_2.setObjectName(u"formLayoutWidget_2")
+        self.formLayoutWidget_2.setGeometry(QRect(0, 10, 361, 301))
+        self.formLayout_4 = QFormLayout(self.formLayoutWidget_2)
+        self.formLayout_4.setObjectName(u"formLayout_4")
+        self.formLayout_4.setVerticalSpacing(10)
+        self.formLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.selector_input_button = QPushButton(self.formLayoutWidget_2)
+        self.selector_input_button.setObjectName(u"selector_input_button")
+
+        self.formLayout_4.setWidget(0, QFormLayout.LabelRole, self.selector_input_button)
+
+        self.selector_input_edit = QLineEdit(self.formLayoutWidget_2)
+        self.selector_input_edit.setObjectName(u"selector_input_edit")
+
+        self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.selector_input_edit)
+
+        self.pushButton = QPushButton(self.formLayoutWidget_2)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.formLayout_4.setWidget(2, QFormLayout.SpanningRole, self.pushButton)
+
+        self.selector_chosen_primer_label = QLabel(self.formLayoutWidget_2)
+        self.selector_chosen_primer_label.setObjectName(u"selector_chosen_primer_label")
+
+        self.formLayout_4.setWidget(3, QFormLayout.LabelRole, self.selector_chosen_primer_label)
+
+        self.selector_chosen_primer_edit = QLineEdit(self.formLayoutWidget_2)
+        self.selector_chosen_primer_edit.setObjectName(u"selector_chosen_primer_edit")
+
+        self.formLayout_4.setWidget(3, QFormLayout.FieldRole, self.selector_chosen_primer_edit)
+
+        self.tableWidget = QTableWidget(self.formLayoutWidget_2)
+        if (self.tableWidget.columnCount() < 3):
+            self.tableWidget.setColumnCount(3)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        if (self.tableWidget.rowCount() < 5):
+            self.tableWidget.setRowCount(5)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setRowCount(5)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+
+        self.formLayout_4.setWidget(1, QFormLayout.SpanningRole, self.tableWidget)
+
         self.toolBox.addItem(self.selector_page, u"Selector")
         self.composer_page = QWidget()
         self.composer_page.setObjectName(u"composer_page")
-        self.composer_page.setGeometry(QRect(0, 0, 373, 467))
+        self.composer_page.setGeometry(QRect(0, 0, 373, 487))
+        self.formLayoutWidget = QWidget(self.composer_page)
+        self.formLayoutWidget.setObjectName(u"formLayoutWidget")
+        self.formLayoutWidget.setGeometry(QRect(10, 20, 351, 153))
+        self.formLayout = QFormLayout(self.formLayoutWidget)
+        self.formLayout.setObjectName(u"formLayout")
+        self.formLayout.setLabelAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.formLayout.setVerticalSpacing(10)
+        self.formLayout.setContentsMargins(0, 0, 0, 0)
+        self.bits_label = QLabel(self.formLayoutWidget)
+        self.bits_label.setObjectName(u"bits_label")
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.bits_label)
+
+        self.bits_content = QPlainTextEdit(self.formLayoutWidget)
+        self.bits_content.setObjectName(u"bits_content")
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.bits_content)
+
+        self.composer_output_button = QPushButton(self.formLayoutWidget)
+        self.composer_output_button.setObjectName(u"composer_output_button")
+
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.composer_output_button)
+
+        self.composer_output_edit = QLineEdit(self.formLayoutWidget)
+        self.composer_output_edit.setObjectName(u"composer_output_edit")
+
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.composer_output_edit)
+
+        self.composer_run_button = QPushButton(self.formLayoutWidget)
+        self.composer_run_button.setObjectName(u"composer_run_button")
+
+        self.formLayout.setWidget(2, QFormLayout.SpanningRole, self.composer_run_button)
+
         self.toolBox.addItem(self.composer_page, u"Composer")
         Bits.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(Bits)
@@ -274,7 +353,7 @@ class Ui_Bits(object):
 
         self.retranslateUi(Bits)
 
-        self.toolBox.setCurrentIndex(2)
+        self.toolBox.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(Bits)
@@ -318,7 +397,20 @@ class Ui_Bits(object):
         self.groupBox.setTitle(QCoreApplication.translate("Bits", u"Primer3 output file:", None))
         self.primer3_out_file_name_label.setText(QCoreApplication.translate("Bits", u"output file", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.formater_page), QCoreApplication.translate("Bits", u"Formater", None))
+        self.selector_input_button.setText(QCoreApplication.translate("Bits", u"Input file", None))
+        self.pushButton.setText(QCoreApplication.translate("Bits", u"Preview", None))
+        self.selector_chosen_primer_label.setText(QCoreApplication.translate("Bits", u"Chosen primer:", None))
+        ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Bits", u"Parameter", None));
+        ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Bits", u"Include", None));
+        ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Bits", u"Order", None));
         self.toolBox.setItemText(self.toolBox.indexOf(self.selector_page), QCoreApplication.translate("Bits", u"Selector", None))
+        self.bits_label.setText(QCoreApplication.translate("Bits", u"Bits:", None))
+        self.bits_content.setPlaceholderText(QCoreApplication.translate("Bits", u"01011011", None))
+        self.composer_output_button.setText(QCoreApplication.translate("Bits", u"Output file", None))
+        self.composer_run_button.setText(QCoreApplication.translate("Bits", u"Compose", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.composer_page), QCoreApplication.translate("Bits", u"Composer", None))
     # retranslateUi
 

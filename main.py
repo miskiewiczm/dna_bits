@@ -7,11 +7,11 @@ from typing import Dict, Callable, List, Union
 import primer3
 import random
 
-from PySide2 import QtCore
 from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog
 from PySide2.QtWidgets import QWidget, QTableWidgetItem
 from ui_bits import Ui_Bits
 from ui_csv_viewer import Ui_CSV_Viewer
+from PySide2.QtCore import QProcess, QSize
 
 # Generator variables
 # Global variables for primers
@@ -83,6 +83,7 @@ class Bits(QMainWindow, Ui_Bits):
     def __init__(self):
         super(Bits, self).__init__()
         self.setupUi(self)
+        self.setFixedSize(QSize(422, 715))
 
         self.primers_length_spinBox.valueChanged.connect(self.primers_length)
         self.number_of_primers_spinBox.valueChanged.connect(
@@ -194,7 +195,7 @@ class Bits(QMainWindow, Ui_Bits):
     def save_file(self):
         global primer_output_file_name
         primer_output_file_name, _ = QFileDialog.getOpenFileName(
-            self, "Reformater Load File",  "",
+            self, "Formatter Load File", "",
             "All Files (*);;Python Files (*.py)")
         self.file_out_lineEdit.setText(primer_output_file_name.split('/')[-1])
 
@@ -288,7 +289,7 @@ def randomizer():
     n = 0
     counter = 0
     window.generate_progressBar.setValue(0)
-    file = open(path + gen_file_name, "w")
+    f = open(f"{path}/{gen_file_name}", "w")
     while counter < number_of_primers:
         primer = "".join(
             random.choice('ACTG') for _ in range(length_of_primer)
@@ -297,15 +298,14 @@ def randomizer():
             if check_gc(primer, gc_min, gc_max, gc_trigger):
                 if check_temp(primer, tm_min, tm_max, tm_trigger):
                     if check_repeats(primer, rpts_trigger):
-                        file.write(primer + '\n')
+                        f.write(primer + '\n')
                         counter += 1
                         app.processEvents()
                         window.generate_progressBar.setValue(
                             int(100 * counter / number_of_primers))
         n += 1
-    file.close()
-    window.statusBar().showMessage(
-        str(n) + " primers tested, ratio: " + str(number_of_primers/n), 10000)
+    f.close()
+    window.statusBar().showMessage(str(n) + " primers tested, ratio: " + str(number_of_primers / n), 10000)
 
 # --- primer3 input generator function
 
@@ -336,10 +336,8 @@ def primer3_run():
     print(os.getcwd())
     output_file_name = primer_output_file_name.split('/')[-1] + "_out"
     window.primer3_out_file_name_label.setText(output_file_name)
-    primer3 = QtCore.QProcess()
-    primer3.execute("primer3_core", [
-                    input_file_name, "--format_output", "--output="
-                    + output_file_name])
+    proc: QProcess = QProcess()
+    proc.execute("primer3_core", [input_file_name, "--format_output", f"--output={output_file_name}"])
     window.statusBar().showMessage("Primer3 finished.", 3000)
 
 

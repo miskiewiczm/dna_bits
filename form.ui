@@ -41,7 +41,7 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>487</height>
+       <height>497</height>
       </rect>
      </property>
      <attribute name="label">
@@ -141,7 +141,7 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>487</height>
+       <height>497</height>
       </rect>
      </property>
      <attribute name="label">
@@ -491,7 +491,7 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>487</height>
+       <height>497</height>
       </rect>
      </property>
      <attribute name="label">
@@ -843,7 +843,7 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>487</height>
+       <height>497</height>
       </rect>
      </property>
      <attribute name="label">
@@ -858,7 +858,7 @@
         <height>301</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="formLayout_4">
+      <layout class="QFormLayout" name="selector_form_layout">
        <property name="verticalSpacing">
         <number>10</number>
        </property>
@@ -873,7 +873,7 @@
         <widget class="QLineEdit" name="selector_input_edit"/>
        </item>
        <item row="2" column="0" colspan="2">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="selector_preview_button">
          <property name="text">
           <string>Preview</string>
          </property>
@@ -890,7 +890,7 @@
         <widget class="QLineEdit" name="selector_chosen_primer_edit"/>
        </item>
        <item row="1" column="0" colspan="2">
-        <widget class="QTableWidget" name="tableWidget">
+        <widget class="QTableWidget" name="selector_sorter_table">
          <property name="rowCount">
           <number>5</number>
          </property>
@@ -928,7 +928,7 @@
        <x>0</x>
        <y>0</y>
        <width>373</width>
-       <height>487</height>
+       <height>497</height>
       </rect>
      </property>
      <attribute name="label">
@@ -943,7 +943,7 @@
         <height>153</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="formLayout">
+      <layout class="QFormLayout" name="composer_form_layout">
        <property name="labelAlignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
@@ -951,14 +951,14 @@
         <number>10</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="bits_label">
+        <widget class="QLabel" name="composer_bits_label">
          <property name="text">
           <string>Bits:</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QPlainTextEdit" name="bits_content">
+        <widget class="QPlainTextEdit" name="composer_bits_content">
          <property name="placeholderText">
           <string>01011011</string>
          </property>
@@ -992,7 +992,7 @@
      <x>0</x>
      <y>0</y>
      <width>422</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>

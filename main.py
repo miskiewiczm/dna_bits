@@ -58,7 +58,7 @@ class FileSelectHelper:
             ";;".join([f"{t} files (*.{t})" for t in d['types']]) + ";;All Files (*)"
         )
 
-        d['label'].setText(d['text'].split('/')[-1])
+        d['label'].setText(d['text'])
         if d['f']:
             d['f']()
 
@@ -178,7 +178,7 @@ class Bits(QMainWindow, Ui_Bits):
         window.generate_progressBar.reset()
         randomizer()
 
-# --- formatter methods ---
+    # --- formatter methods ---
 
     def load_file(self):
         global primer_input_file_name
@@ -189,7 +189,7 @@ class Bits(QMainWindow, Ui_Bits):
         window.statusBar().showMessage(
             str(lines_counter(
                 primer_input_file_name)
-                ) + " primers in input file.", 10000
+            ) + " primers in input file.", 10000
         )
 
     def save_file(self):
@@ -212,33 +212,33 @@ class Bits(QMainWindow, Ui_Bits):
         primer3_input()
 
     def csv_preview(self):
-        csv = open(self.fsh['selector_input'], "r")
-        header = csv.readline().split(",")
-        header[-1] = header[-1][0:-1]
-        column = 0
-        for item in header:
-            csv_window.csv_table.setHorizontalHeaderItem(
-                column, QTableWidgetItem(item))
-            column += 1
-        for line in csv:
+        with open(self.fsh['selector_input'], "r") as csv:
+            header = csv.readline().split(",")
+            header[-1] = header[-1][0:-1]
             column = 0
-            data = line.split(',')
-            rowPosition = csv_window.csv_table.rowCount()
-            csv_window.csv_table.insertRow(rowPosition)
-            for item in data:
-                csv_window.csv_table.setItem(
-                    rowPosition, column, QTableWidgetItem(item))
+            for item in header:
+                csv_window.csv_table.setHorizontalHeaderItem(
+                    column, QTableWidgetItem(item))
                 column += 1
-        csv_window.show()
+            for line in csv:
+                column = 0
+                data = line.split(',')
+                rowPosition = csv_window.csv_table.rowCount()
+                csv_window.csv_table.insertRow(rowPosition)
+                for item in data:
+                    csv_window.csv_table.setItem(
+                        rowPosition, column, QTableWidgetItem(item))
+                    column += 1
+            csv_window.show()
+
 
 # --- * ---
 
 
 def lines_counter(file_name):
-    file = open(file_name, "r")
-    tmp = sum(1 for _ in file)
-    file.close()
-    return tmp
+    with open(file_name, "r") as file:
+        tmp = sum(1 for _ in file)
+        return tmp
 
 
 # --- primers randomizer functions ---
@@ -248,8 +248,8 @@ def check_runs(prim, trigger_runs):
         return True
     else:
         return not (
-            'AAAAA' in prim or 'CCCCC' in prim
-            or 'TTTTT' in prim or 'GGGGG' in prim)
+                'AAAAA' in prim or 'CCCCC' in prim
+                or 'TTTTT' in prim or 'GGGGG' in prim)
 
 
 def check_temp(prim, tmin, tmax, trigger_temp):
@@ -282,6 +282,7 @@ def check_repeats(prim, trigger_rept):
                 return False
         return True
 
+
 # --- primer randomizer main function
 
 
@@ -289,23 +290,24 @@ def randomizer():
     n = 0
     counter = 0
     window.generate_progressBar.setValue(0)
-    f = open(f"{path}/{gen_file_name}", "w")
-    while counter < number_of_primers:
-        primer = "".join(
-            random.choice('ACTG') for _ in range(length_of_primer)
-        )
-        if check_runs(primer, runs_trigger):
-            if check_gc(primer, gc_min, gc_max, gc_trigger):
-                if check_temp(primer, tm_min, tm_max, tm_trigger):
-                    if check_repeats(primer, rpts_trigger):
-                        f.write(primer + '\n')
-                        counter += 1
-                        app.processEvents()
-                        window.generate_progressBar.setValue(
-                            int(100 * counter / number_of_primers))
-        n += 1
-    f.close()
+    with open(f"{path}/{gen_file_name}", "w") as f:
+        while counter < number_of_primers:
+            primer = "".join(
+                random.choice('ACTG') for _ in range(length_of_primer)
+            )
+            if check_runs(primer, runs_trigger):
+                if check_gc(primer, gc_min, gc_max, gc_trigger):
+                    if check_temp(primer, tm_min, tm_max, tm_trigger):
+                        if check_repeats(primer, rpts_trigger):
+                            f.write(primer + '\n')
+                            counter += 1
+                            app.processEvents()
+                            window.generate_progressBar.setValue(
+                                int(100 * counter / number_of_primers))
+            n += 1
+
     window.statusBar().showMessage(str(n) + " primers tested, ratio: " + str(number_of_primers / n), 10000)
+
 
 # --- primer3 input generator function
 
@@ -313,22 +315,20 @@ def randomizer():
 def primer3_input():
     counter = 0
     number_of_lines = lines_counter(primer_input_file_name)
-    input_file = open(primer_input_file_name, "r")
-    output_file = open(primer_output_file_name, "w")
-    output_file.write("SEQUENCE_ID=" + seq_id + end)
-    output_file.write("PRIMER_TASK=" + task + end)
-    output_file.write("PRIMER_SALT_MONOVALENT=" + str(psm) + end)
-    output_file.write("PRIMER_SALT_DIVALENT=" + str(psd) + end)
-    output_file.write("PRIMER_DNTP_CONC=" + str(pdc) + end)
-    output_file.write("PRIMER_DNA_CONC=" + str(pnc) + end)
-    for primer in input_file:
-        output_file.write("SEQUENCE_PRIMER=" + primer)
-        output_file.write("=\n")
-        app.processEvents()
-        window.generate_pri_progressBar.setValue(int(counter / number_of_lines * 100))
-        counter += 1
-    output_file.close()
-    input_file.close()
+    with open(primer_input_file_name, "r") as input_file:
+        with open(primer_output_file_name, "w") as output_file:
+            output_file.write("SEQUENCE_ID=" + seq_id + end)
+            output_file.write("PRIMER_TASK=" + task + end)
+            output_file.write("PRIMER_SALT_MONOVALENT=" + str(psm) + end)
+            output_file.write("PRIMER_SALT_DIVALENT=" + str(psd) + end)
+            output_file.write("PRIMER_DNTP_CONC=" + str(pdc) + end)
+            output_file.write("PRIMER_DNA_CONC=" + str(pnc) + end)
+            for primer in input_file:
+                output_file.write("SEQUENCE_PRIMER=" + primer)
+                output_file.write("=\n")
+                app.processEvents()
+                window.generate_pri_progressBar.setValue(int(counter / number_of_lines * 100))
+                counter += 1
 
 
 def primer3_run():
@@ -347,28 +347,26 @@ def csv_generator():
     input_file_name = primer_output_file_name.split('/')[-1] + "_out"
     output_file_name = input_file_name.split('.')[0] + ".csv"
     number_of_lines = lines_counter(input_file_name)
-    file_in = open(input_file_name, "r")
-    file_out = open(output_file_name, "w")
-    header = "sequence,tm,gc_per,any_th,3p_th,hairpin_th\n"
-    file_out.write(header)
-    for line in file_in:
-        if line[0:5] == "OLIGO":
-            line = file_in.readline().split()
-            tm = line[3]
-            gc = line[4]
-            any_th = line[5]
-            p3_th = line[6]
-            hairpin = line[7]
-            sequence = line[8]
-            file_out.write(
-                sequence + "," + tm + "," + gc + "," + any_th + ","
-                + p3_th + "," + hairpin + "\n")
-        window.generate_csv_progressBar.setValue(
-            int(counter / number_of_lines * 100))
-        counter += 1
-        app.processEvents()
-    file_in.close()
-    file_out.close()
+    with open(input_file_name, "r") as file_in:
+        with open(output_file_name, "w") as file_out:
+            header = "sequence,tm,gc_per,any_th,3p_th,hairpin_th\n"
+            file_out.write(header)
+            for line in file_in:
+                if line[0:5] == "OLIGO":
+                    line = file_in.readline().split()
+                    tm = line[3]
+                    gc = line[4]
+                    any_th = line[5]
+                    p3_th = line[6]
+                    hairpin = line[7]
+                    sequence = line[8]
+                    file_out.write(
+                        sequence + "," + tm + "," + gc + "," + any_th + ","
+                        + p3_th + "," + hairpin + "\n")
+                window.generate_csv_progressBar.setValue(
+                    int(counter / number_of_lines * 100))
+                counter += 1
+                app.processEvents()
 
 
 # --- MAIN LOOP ---

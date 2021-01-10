@@ -189,7 +189,7 @@ class Bits(QMainWindow, Ui_Bits):
         window.statusBar().showMessage(
             str(lines_counter(
                 primer_input_file_name)
-            ) + " primers in input file.", 10000
+                ) + " primers in input file.", 10000
         )
 
     def save_file(self):
@@ -315,20 +315,19 @@ def randomizer():
 def primer3_input():
     counter = 0
     number_of_lines = lines_counter(primer_input_file_name)
-    with open(primer_input_file_name, "r") as input_file:
-        with open(primer_output_file_name, "w") as output_file:
-            output_file.write("SEQUENCE_ID=" + seq_id + end)
-            output_file.write("PRIMER_TASK=" + task + end)
-            output_file.write("PRIMER_SALT_MONOVALENT=" + str(psm) + end)
-            output_file.write("PRIMER_SALT_DIVALENT=" + str(psd) + end)
-            output_file.write("PRIMER_DNTP_CONC=" + str(pdc) + end)
-            output_file.write("PRIMER_DNA_CONC=" + str(pnc) + end)
-            for primer in input_file:
-                output_file.write("SEQUENCE_PRIMER=" + primer)
-                output_file.write("=\n")
-                app.processEvents()
-                window.generate_pri_progressBar.setValue(int(counter / number_of_lines * 100))
-                counter += 1
+    with open(primer_input_file_name, "r") as input_file, open(primer_output_file_name, "w") as output_file:
+        output_file.write("SEQUENCE_ID=" + seq_id + end)
+        output_file.write("PRIMER_TASK=" + task + end)
+        output_file.write("PRIMER_SALT_MONOVALENT=" + str(psm) + end)
+        output_file.write("PRIMER_SALT_DIVALENT=" + str(psd) + end)
+        output_file.write("PRIMER_DNTP_CONC=" + str(pdc) + end)
+        output_file.write("PRIMER_DNA_CONC=" + str(pnc) + end)
+        for primer in input_file:
+            output_file.write("SEQUENCE_PRIMER=" + primer)
+            output_file.write("=\n")
+            app.processEvents()
+            window.generate_pri_progressBar.setValue(int(counter / number_of_lines * 100))
+            counter += 1
 
 
 def primer3_run():

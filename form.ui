@@ -796,21 +796,14 @@
        <item row="1" column="0" colspan="2">
         <widget class="QTableWidget" name="selector_sorter_table">
          <property name="rowCount">
-          <number>5</number>
+          <number>0</number>
+         </property>
+         <property name="columnCount">
+          <number>3</number>
          </property>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <column>
-          <property name="text">
-           <string>Parameter</string>
-          </property>
-         </column>
          <column>
           <property name="text">
            <string>Include</string>
@@ -819,6 +812,11 @@
          <column>
           <property name="text">
            <string>Order</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Priority</string>
           </property>
          </column>
         </widget>

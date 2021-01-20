@@ -342,10 +342,9 @@ class Ui_Bits(object):
         self.selector_sorter_table.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         self.selector_sorter_table.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        if (self.selector_sorter_table.rowCount() < 5):
-            self.selector_sorter_table.setRowCount(5)
         self.selector_sorter_table.setObjectName(u"selector_sorter_table")
-        self.selector_sorter_table.setRowCount(5)
+        self.selector_sorter_table.setRowCount(0)
+        self.selector_sorter_table.setColumnCount(3)
         self.selector_sorter_table.horizontalHeader().setStretchLastSection(True)
 
         self.selector_form_layout.setWidget(1, QFormLayout.SpanningRole, self.selector_sorter_table)
@@ -443,11 +442,11 @@ class Ui_Bits(object):
         self.selector_preview_button.setText(QCoreApplication.translate("Bits", u"Preview", None))
         self.selector_chosen_primer_label.setText(QCoreApplication.translate("Bits", u"Chosen primer:", None))
         ___qtablewidgetitem = self.selector_sorter_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("Bits", u"Parameter", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Bits", u"Include", None));
         ___qtablewidgetitem1 = self.selector_sorter_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Bits", u"Include", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Bits", u"Order", None));
         ___qtablewidgetitem2 = self.selector_sorter_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("Bits", u"Order", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Bits", u"Priority", None));
         self.toolBox.setItemText(self.toolBox.indexOf(self.selector_page), QCoreApplication.translate("Bits", u"Selector", None))
         self.composer_bits_label.setText(QCoreApplication.translate("Bits", u"Bits:", None))
         self.composer_bits_content.setPlaceholderText(QCoreApplication.translate("Bits", u"01011011", None))

@@ -1,17 +1,18 @@
 #!/usr/local/bin/python3
 #
-import sys
 import os
+import random
+import sys
 from typing import Dict, Callable, List, Union
 
 import primer3
-import random
+from PySide2.QtCore import QProcess, QSize
+from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog, QTableWidgetItem
+from PySide2.QtWidgets import QWidget
 
-from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog
-from PySide2.QtWidgets import QWidget, QTableWidgetItem
+from table_items_widgets import ComboOrderWidget, SpinBoxWidget, CheckBoxWidget
 from ui_bits import Ui_Bits
 from ui_csv_viewer import Ui_CSV_Viewer
-from PySide2.QtCore import QProcess, QSize
 
 # Generator variables
 # Global variables for primers
@@ -107,6 +108,7 @@ class Bits(QMainWindow, Ui_Bits):
         self.run_pr3_pushButton.clicked.connect(primer3_run)
         self.generate_csv_pushButton.clicked.connect(csv_generator)
 
+        self.prepare_selector_sorter_table()
         self.selector_preview_button.clicked.connect(self.csv_preview)
 
         # file selectors
@@ -230,6 +232,18 @@ class Bits(QMainWindow, Ui_Bits):
                         rowPosition, column, QTableWidgetItem(item))
                     column += 1
             csv_window.show()
+
+    def prepare_selector_sorter_table(self):
+        parameters = ["any_th", "3p_th", "hairpin_th", "gc_per", "tm"]
+        self.selector_sorter_table.setRowCount(len(parameters))
+        self.selector_sorter_table.setVerticalHeaderLabels(parameters)
+
+        for i in range(len(parameters)):
+            self.selector_sorter_table.setCellWidget(i, 0, CheckBoxWidget(self))
+            self.selector_sorter_table.setCellWidget(i, 1, SpinBoxWidget(self))
+            self.selector_sorter_table.setCellWidget(i, 2, ComboOrderWidget(self))
+
+        self.selector_sorter_table.resizeColumnToContents(0)
 
 
 # --- * ---

@@ -239,8 +239,12 @@ class Bits(QMainWindow, Ui_Bits):
         self.selector_sorter_table.setVerticalHeaderLabels(parameters)
 
         for i in range(len(parameters)):
+            spinbox_widget = SpinBoxWidget(self)
+            spinbox_widget.spinbox.setMaximum(len(parameters))
+            spinbox_widget.spinbox.setValue(i + 1)
+
             self.selector_sorter_table.setCellWidget(i, 0, CheckBoxWidget(self))
-            self.selector_sorter_table.setCellWidget(i, 1, SpinBoxWidget(self))
+            self.selector_sorter_table.setCellWidget(i, 1, spinbox_widget)
             self.selector_sorter_table.setCellWidget(i, 2, ComboOrderWidget(self))
 
         self.selector_sorter_table.resizeColumnToContents(0)

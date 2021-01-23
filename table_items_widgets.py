@@ -7,6 +7,7 @@ class CheckBoxWidget(QWidget):
         super(CheckBoxWidget, self).__init__(parent)
 
         self.checkbox = QCheckBox()
+        self.checkbox.setChecked(True)
 
         self.create_gui()
 

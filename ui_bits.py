@@ -320,6 +320,7 @@ class Ui_Bits(object):
 
         self.selector_preview_button = QPushButton(self.formLayoutWidget_2)
         self.selector_preview_button.setObjectName(u"selector_preview_button")
+        self.selector_preview_button.setEnabled(False)
 
         self.selector_form_layout.setWidget(2, QFormLayout.SpanningRole, self.selector_preview_button)
 

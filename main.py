@@ -60,9 +60,10 @@ class FileSelectHelper:
 
         d['label'].setText(d['text'])
         if d['f']:
-            d['f']()
+            d['f'](d['text'] != "")
 
-    def add_file_handler(self, name: str, button, label, types: Union[str, List[str]] = None, f: Callable = None):
+    def add_file_handler(self, name: str, button, label, types: Union[str, List[str]] = None,
+                         f: Callable[[bool], None] = None):
         if isinstance(types, str):
             types = [types]
 
@@ -71,6 +72,12 @@ class FileSelectHelper:
 
     def __getitem__(self, item):
         return self.data[item]['text']
+
+    @staticmethod
+    def callback_button_enabled(button):
+        def inner(success: bool):
+            button.setEnabled(success)
+        return inner
 
 
 class CSV_Viewer(QWidget, Ui_CSV_Viewer):
@@ -114,7 +121,11 @@ class Bits(QMainWindow, Ui_Bits):
         self.fsh.add_file_handler("generator_output", self.generator_output_button, self.generator_output_edit, 'txt')
         self.fsh.add_file_handler("formatter_input", self.formatter_input_button, self.formatter_input_edit)
         self.fsh.add_file_handler("formatter_output", self.formatter_output_button, self.formatter_output_edit)
-        self.fsh.add_file_handler("selector_input", self.selector_input_button, self.selector_input_edit, 'csv')
+        self.fsh.add_file_handler(
+            "selector_input",
+            self.selector_input_button,
+            self.selector_input_edit, 'csv',
+            FileSelectHelper.callback_button_enabled(self.selector_preview_button))
         self.fsh.add_file_handler("composer_output", self.composer_output_button, self.composer_output_edit)
 
     def gen_file_name_changed(self):

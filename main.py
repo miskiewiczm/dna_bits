@@ -217,11 +217,8 @@ class Bits(QMainWindow, Ui_Bits):
         with open(self.fsh['selector_input'], "r") as csv:
             header = csv.readline().split(",")
             header[-1] = header[-1][0:-1]
-            column = 0
-            for item in header:
-                csv_window.csv_table.setHorizontalHeaderItem(
-                    column, QTableWidgetItem(item))
-                column += 1
+            csv_window.csv_table.setHorizontalHeaderLabels(header)
+
             for line in csv:
                 column = 0
                 data = line.split(',')

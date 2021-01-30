@@ -221,7 +221,7 @@ class Bits(QMainWindow, Ui_Bits):
 
             for line in csv:
                 column = 0
-                data = line.split(',')
+                data = line.strip().split(',')
                 rowPosition = csv_window.csv_table.rowCount()
                 csv_window.csv_table.insertRow(rowPosition)
                 for item in data:

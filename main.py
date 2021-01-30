@@ -79,6 +79,7 @@ class CSV_Viewer(QWidget, Ui_CSV_Viewer):
         super(CSV_Viewer, self).__init__()
         self.setupUi(self)
 
+        self.setAttribute(Qt.WA_QuitOnClose, False)
 
 class Bits(QMainWindow, Ui_Bits):
     def __init__(self):

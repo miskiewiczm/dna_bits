@@ -1,12 +1,13 @@
 from PySide2.QtCore import QCoreApplication, QMetaObject
 from PySide2.QtGui import QResizeEvent
-from PySide2.QtWidgets import QFrame, QTableWidget, QWidget, QVBoxLayout
+from PySide2.QtWidgets import QAbstractItemView, QFrame, QTableWidget, QWidget, QVBoxLayout
 
 
 class CsvTable(QTableWidget):
     def __init__(self, parent: QWidget = None):
         super().__init__(parent)
         self.horizontalHeader().setCascadingSectionResizes(True)
+        self.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
     def resizeEvent(self, event: QResizeEvent) -> None:
         super().resizeEvent(event)

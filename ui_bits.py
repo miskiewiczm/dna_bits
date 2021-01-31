@@ -318,21 +318,6 @@ class Ui_Bits(object):
 
         self.selector_form_layout.setWidget(0, QFormLayout.FieldRole, self.selector_input_edit)
 
-        self.selector_preview_button = QPushButton(self.formLayoutWidget_2)
-        self.selector_preview_button.setObjectName(u"selector_preview_button")
-
-        self.selector_form_layout.setWidget(2, QFormLayout.SpanningRole, self.selector_preview_button)
-
-        self.selector_chosen_primer_label = QLabel(self.formLayoutWidget_2)
-        self.selector_chosen_primer_label.setObjectName(u"selector_chosen_primer_label")
-
-        self.selector_form_layout.setWidget(3, QFormLayout.LabelRole, self.selector_chosen_primer_label)
-
-        self.selector_chosen_primer_edit = QLineEdit(self.formLayoutWidget_2)
-        self.selector_chosen_primer_edit.setObjectName(u"selector_chosen_primer_edit")
-
-        self.selector_form_layout.setWidget(3, QFormLayout.FieldRole, self.selector_chosen_primer_edit)
-
         self.selector_sorter_table = QTableWidget(self.formLayoutWidget_2)
         if (self.selector_sorter_table.columnCount() < 3):
             self.selector_sorter_table.setColumnCount(3)
@@ -348,6 +333,28 @@ class Ui_Bits(object):
         self.selector_sorter_table.horizontalHeader().setStretchLastSection(True)
 
         self.selector_form_layout.setWidget(1, QFormLayout.SpanningRole, self.selector_sorter_table)
+
+        self.selector_preview_button = QPushButton(self.formLayoutWidget_2)
+        self.selector_preview_button.setObjectName(u"selector_preview_button")
+
+        self.selector_form_layout.setWidget(3, QFormLayout.SpanningRole, self.selector_preview_button)
+
+        self.selector_chosen_primer_label = QLabel(self.formLayoutWidget_2)
+        self.selector_chosen_primer_label.setObjectName(u"selector_chosen_primer_label")
+
+        self.selector_form_layout.setWidget(4, QFormLayout.LabelRole, self.selector_chosen_primer_label)
+
+        self.selector_chosen_primer_edit = QLineEdit(self.formLayoutWidget_2)
+        self.selector_chosen_primer_edit.setObjectName(u"selector_chosen_primer_edit")
+
+        self.selector_form_layout.setWidget(4, QFormLayout.FieldRole, self.selector_chosen_primer_edit)
+
+        self.label = QLabel(self.formLayoutWidget_2)
+        self.label.setObjectName(u"label")
+        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setWordWrap(True)
+
+        self.selector_form_layout.setWidget(2, QFormLayout.SpanningRole, self.label)
 
         self.toolBox.addItem(self.selector_page, u"Selector")
         self.composer_page = QWidget()
@@ -439,14 +446,15 @@ class Ui_Bits(object):
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("Bits", u"output file", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.formater_page), QCoreApplication.translate("Bits", u"Formatter", None))
         self.selector_input_button.setText(QCoreApplication.translate("Bits", u"Input file", None))
-        self.selector_preview_button.setText(QCoreApplication.translate("Bits", u"Preview", None))
-        self.selector_chosen_primer_label.setText(QCoreApplication.translate("Bits", u"Chosen primer:", None))
         ___qtablewidgetitem = self.selector_sorter_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("Bits", u"Include", None));
         ___qtablewidgetitem1 = self.selector_sorter_table.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("Bits", u"Order", None));
         ___qtablewidgetitem2 = self.selector_sorter_table.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Bits", u"Priority", None));
+        self.selector_preview_button.setText(QCoreApplication.translate("Bits", u"Preview", None))
+        self.selector_chosen_primer_label.setText(QCoreApplication.translate("Bits", u"Chosen primer:", None))
+        self.label.setText(QCoreApplication.translate("Bits", u"Select the primer and close the preview window", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.selector_page), QCoreApplication.translate("Bits", u"Selector", None))
         self.composer_bits_label.setText(QCoreApplication.translate("Bits", u"Bits:", None))
         self.composer_bits_content.setPlaceholderText(QCoreApplication.translate("Bits", u"01011011", None))

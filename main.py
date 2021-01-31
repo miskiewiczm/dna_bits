@@ -77,11 +77,19 @@ class FileSelectHelper:
 
 
 class CSV_Viewer(QWidget, Ui_CSV_Viewer):
-    def __init__(self):
+    def __init__(self, parent):
         super(CSV_Viewer, self).__init__()
         self.setupUi(self)
+        self.parent = parent
 
         self.setAttribute(Qt.WA_QuitOnClose, False)
+
+    def closeEvent(self, event):
+        row = self.csv_table.currentItem().row()
+        item = self.csv_table.item(row, 0)
+        primer = item.text()
+        self.parent.selector_chosen_primer_edit.setText(primer)
+        event.accept()
 
 
 class Bits(QMainWindow, Ui_Bits):
@@ -428,6 +436,6 @@ def csv_generator():
 if __name__ == "__main__":
     app = QApplication([])
     window = Bits()
-    csv_window = CSV_Viewer()
+    csv_window = CSV_Viewer(window)
     window.show()
     sys.exit(app.exec_())

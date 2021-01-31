@@ -271,8 +271,9 @@ class Bits(QMainWindow, Ui_Bits):
                 rowPosition = csv_window.csv_table.rowCount()
                 csv_window.csv_table.insertRow(rowPosition)
                 for item in line:
-                    csv_window.csv_table.setItem(
-                        rowPosition, column, QTableWidgetItem(item))
+                    table_item = QTableWidgetItem(item)
+                    table_item.setTextAlignment(Qt.AlignCenter)
+                    csv_window.csv_table.setItem(rowPosition, column, table_item)
                     column += 1
 
             csv_window.csv_table.resizeColumnToContents(0)

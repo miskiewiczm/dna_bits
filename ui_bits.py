@@ -449,9 +449,9 @@ class Ui_Bits(object):
         ___qtablewidgetitem = self.selector_sorter_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("Bits", u"Include", None));
         ___qtablewidgetitem1 = self.selector_sorter_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Bits", u"Order", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Bits", u"Priority", None));
         ___qtablewidgetitem2 = self.selector_sorter_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("Bits", u"Priority", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Bits", u"Order", None));
         self.selector_preview_button.setText(QCoreApplication.translate("Bits", u"Preview", None))
         self.selector_chosen_primer_label.setText(QCoreApplication.translate("Bits", u"Chosen primer:", None))
         self.label.setText(QCoreApplication.translate("Bits", u"Select the primer and close the preview window", None))

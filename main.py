@@ -282,6 +282,7 @@ class Bits(QMainWindow, Ui_Bits):
     def prepare_selector_sorter_table(self):
         self.selector_sorter_table.setRowCount(len(self.CSV_PARAMETERS))
         self.selector_sorter_table.setVerticalHeaderLabels(self.CSV_PARAMETERS)
+        self.selector_sorter_table.horizontalHeader().setCascadingSectionResizes(True)
 
         for i in range(len(self.CSV_PARAMETERS)):
             spinbox_widget = SpinBoxWidget(self)

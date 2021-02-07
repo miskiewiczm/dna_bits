@@ -794,12 +794,12 @@
          </column>
          <column>
           <property name="text">
-           <string>Order</string>
+           <string>Priority</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Priority</string>
+           <string>Order</string>
           </property>
          </column>
         </widget>

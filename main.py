@@ -6,11 +6,11 @@ import random
 import sys
 from typing import Dict, Callable, List, Union
 
+import pandas as pd
 import primer3
 from PySide2.QtCore import QProcess, QSize, Qt
 from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog, QTableWidgetItem
 from PySide2.QtWidgets import QWidget
-import pandas as pd
 
 from table_items_widgets import ComboOrderWidget, SpinBoxWidget, CheckBoxWidget
 from ui_bits import Ui_Bits
@@ -282,16 +282,17 @@ class Bits(QMainWindow, Ui_Bits):
                 rowPosition = csv_window.csv_table.rowCount()
                 csv_window.csv_table.insertRow(rowPosition)
                 for item in line:
-                    csv_window.csv_table.setItem(
-                        rowPosition, column, QTableWidgetItem(item))
+                    table_item = QTableWidgetItem(item)
+                    table_item.setTextAlignment(Qt.AlignCenter)
+                    csv_window.csv_table.setItem(rowPosition, column, table_item)
                     column += 1
 
-            csv_window.csv_table.resizeColumnToContents(0)
             csv_window.show()
 
     def prepare_selector_sorter_table(self):
         self.selector_sorter_table.setRowCount(len(self.CSV_PARAMETERS))
         self.selector_sorter_table.setVerticalHeaderLabels(self.CSV_PARAMETERS)
+        self.selector_sorter_table.horizontalHeader().setCascadingSectionResizes(True)
 
         for i in range(len(self.CSV_PARAMETERS)):
             spinbox_widget = SpinBoxWidget(self)

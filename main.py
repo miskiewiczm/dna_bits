@@ -1,17 +1,20 @@
 #!/usr/local/bin/python3
-#
-import sys
+
+import csv
 import os
+import random
+import sys
 from typing import Dict, Callable, List, Union
 
 import primer3
-import random
+from PySide2.QtCore import QProcess, QSize, Qt
+from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog, QTableWidgetItem
+from PySide2.QtWidgets import QWidget
+import pandas as pd
 
-from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog
-from PySide2.QtWidgets import QWidget, QTableWidgetItem
+from table_items_widgets import ComboOrderWidget, SpinBoxWidget, CheckBoxWidget
 from ui_bits import Ui_Bits
 from ui_csv_viewer import Ui_CSV_Viewer
-from PySide2.QtCore import QProcess, QSize
 
 # Generator variables
 # Global variables for primers
@@ -81,12 +84,24 @@ class FileSelectHelper:
 
 
 class CSV_Viewer(QWidget, Ui_CSV_Viewer):
-    def __init__(self):
+    def __init__(self, parent):
         super(CSV_Viewer, self).__init__()
         self.setupUi(self)
+        self.parent = parent
+
+        self.setAttribute(Qt.WA_QuitOnClose, False)
+
+    def closeEvent(self, event):
+        row = self.csv_table.currentItem().row()
+        item = self.csv_table.item(row, 0)
+        primer = item.text()
+        self.parent.selector_chosen_primer_edit.setText(primer)
+        event.accept()
 
 
 class Bits(QMainWindow, Ui_Bits):
+    CSV_PARAMETERS = ("any_th", "3p_th", "hairpin_th", "gc_per", "tm")
+
     def __init__(self):
         super(Bits, self).__init__()
         self.setupUi(self)
@@ -114,6 +129,7 @@ class Bits(QMainWindow, Ui_Bits):
         self.run_pr3_pushButton.clicked.connect(primer3_run)
         self.generate_csv_pushButton.clicked.connect(csv_generator)
 
+        self.prepare_selector_sorter_table()
         self.selector_preview_button.clicked.connect(self.csv_preview)
 
         # file selectors
@@ -223,24 +239,70 @@ class Bits(QMainWindow, Ui_Bits):
         primer3_input()
 
     def csv_preview(self):
-        with open(self.fsh['selector_input'], "r") as csv:
-            header = csv.readline().split(",")
+        with open(self.fsh['selector_input'], "r") as csv_file:
+            reader = csv.DictReader(csv_file)
+            csv_window.csv_table.setRowCount(0)
+
+            csv_data = []
+            for row in reader:
+                csv_data.append(row)
+
+            header = reader.fieldnames
             header[-1] = header[-1][0:-1]
-            column = 0
-            for item in header:
-                csv_window.csv_table.setHorizontalHeaderItem(
-                    column, QTableWidgetItem(item))
-                column += 1
-            for line in csv:
+            csv_window.csv_table.setHorizontalHeaderLabels(header)
+
+            sort_by = []
+            sort_ascending = []
+            parameter_options = {}
+            for i in range(len(self.CSV_PARAMETERS)):
+                check = self.selector_sorter_table.cellWidget(i, 0)
+                spin = self.selector_sorter_table.cellWidget(i, 1)
+                combo = self.selector_sorter_table.cellWidget(i, 2)
+
+                # not checked parameter are skipped
+                if not check.get_value():
+                    continue
+
+                parameter_options[self.CSV_PARAMETERS[i]] = (
+                    spin.get_value(),
+                    combo.get_value(),
+                )
+
+            for parameter, options in sorted(parameter_options.items(), key=lambda x: x[0]):
+                sort_by.append(parameter)
+                # asc/desc is hardened as 1/2 respectively
+                sort_ascending.append(options[1] == 1)
+
+            data = pd.DataFrame(csv_data)
+            data_sort = data.sort_values(by=sort_by, ascending=sort_ascending)
+            csv_data = data_sort.values.tolist()
+
+            for line in csv_data:
                 column = 0
-                data = line.split(',')
                 rowPosition = csv_window.csv_table.rowCount()
                 csv_window.csv_table.insertRow(rowPosition)
-                for item in data:
+                for item in line:
                     csv_window.csv_table.setItem(
                         rowPosition, column, QTableWidgetItem(item))
                     column += 1
+
+            csv_window.csv_table.resizeColumnToContents(0)
             csv_window.show()
+
+    def prepare_selector_sorter_table(self):
+        self.selector_sorter_table.setRowCount(len(self.CSV_PARAMETERS))
+        self.selector_sorter_table.setVerticalHeaderLabels(self.CSV_PARAMETERS)
+
+        for i in range(len(self.CSV_PARAMETERS)):
+            spinbox_widget = SpinBoxWidget(self)
+            spinbox_widget.spinbox.setMaximum(len(self.CSV_PARAMETERS))
+            spinbox_widget.spinbox.setValue(i + 1)
+
+            self.selector_sorter_table.setCellWidget(i, 0, CheckBoxWidget(self))
+            self.selector_sorter_table.setCellWidget(i, 1, spinbox_widget)
+            self.selector_sorter_table.setCellWidget(i, 2, ComboOrderWidget(self))
+
+        self.selector_sorter_table.resizeColumnToContents(0)
 
 
 # --- * ---
@@ -385,6 +447,6 @@ def csv_generator():
 if __name__ == "__main__":
     app = QApplication([])
     window = Bits()
-    csv_window = CSV_Viewer()
+    csv_window = CSV_Viewer(window)
     window.show()
     sys.exit(app.exec_())

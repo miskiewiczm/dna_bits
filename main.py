@@ -123,6 +123,7 @@ class Bits(QMainWindow, Ui_Bits):
         self.repeats_checkBox.stateChanged.connect(self.repeats_set)
 
         self.generator_start_button.clicked.connect(self.start_generate)
+        self.gen_input_edit.textChanged.connect(self.gen_input_file_changed)
 
         self.sequence_id_lineEdit.textChanged.connect(self.sequenceID_edit)
         self.generate_pushButton.clicked.connect(self.primer3_input_generator)
@@ -157,6 +158,11 @@ class Bits(QMainWindow, Ui_Bits):
         self.generator_out_file_lineEdit.setText(gen_file_name.split('/')[-1])
         primer_input_file_name = gen_file_name
         self.file_in_label.setText(primer_input_file_name)
+
+    def gen_input_file_changed(self, filename):
+        empty = len(filename) == 0
+        self.numbers_of_primers.setEnabled(empty)
+        self.number_of_primers_spinBox.setEnabled(empty)
 
     def primers_length(self):
         global length_of_primer

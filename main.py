@@ -206,10 +206,31 @@ class Bits(QMainWindow, Ui_Bits):
         global gc_max
         gc_max = self.gcmax_doubleSpinBox.value()
 
-    @staticmethod
-    def start_generate():
+    def start_generate(self):
         window.generate_progressBar.reset()
-        randomizer()
+        if len(self.gen_input_edit.text()) == 0:
+            randomizer()
+        else:
+            self.get_primers_from_file()
+
+    def get_primers_from_file(self):
+        file_path = self.gen_input_edit.text()
+        primer_len = self.primers_length_spinBox.value()
+
+        # file must contain only one line with gens' series
+        with open(file_path, 'r') as primers_input_file:
+            line = primers_input_file.read()
+            last_index = len(line) - primer_len
+
+            with open(f"{path}/{gen_file_name}", "w") as output:
+                for start_index in range(len(line) - primer_len):
+                    primer = line[start_index: start_index + primer_len]
+                    if is_primer_acceptable(primer):
+                        output.write(primer + '\n')
+
+                    self.generate_progress_bar.setValue(int((start_index / last_index) * 100))
+
+        self.generate_progress_bar.setValue(100)  # in some values it may display 99 at the end
 
     # --- formatter methods ---
 

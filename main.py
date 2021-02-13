@@ -157,7 +157,7 @@ class Bits(QMainWindow, Ui_Bits):
         gen_file_name, _ = QFileDialog.getOpenFileName(
             self, "Generator Load File", "",
             "All Files (*);; Text filex (*.txt)")
-        self.generator_out_file_lineEdit.setText(gen_file_name.split('/')[-1])
+        self.generator_out_file_lineEdit.setText(gen_file_name.split(QDir.separator())[-1])
         primer_input_file_name = gen_file_name
         self.file_in_label.setText(primer_input_file_name)
 
@@ -245,7 +245,7 @@ class Bits(QMainWindow, Ui_Bits):
         primer_input_file_name, _ = QFileDialog.getOpenFileName(
             self, "Reformater Load File", "",
             "All Files (*);;Python Files (*.py)")
-        self.file_in_label.setText(primer_input_file_name.split('/')[-1])
+        self.file_in_label.setText(primer_input_file_name.split(QDir.separator())[-1])
         window.statusBar().showMessage(
             str(lines_counter(
                 primer_input_file_name)
@@ -257,7 +257,7 @@ class Bits(QMainWindow, Ui_Bits):
         primer_output_file_name, _ = QFileDialog.getOpenFileName(
             self, "Formatter Load File", "",
             "All Files (*);;Python Files (*.py)")
-        self.file_out_lineEdit.setText(primer_output_file_name.split('/')[-1])
+        self.file_out_lineEdit.setText(primer_output_file_name.split(QDir.separator())[-1])
 
     def save_lineEdit(self):
         global primer_output_file_name
@@ -441,7 +441,7 @@ def primer3_input():
 def primer3_run():
     input_file_name = primer_output_file_name
     print(os.getcwd())
-    output_file_name = primer_output_file_name.split('/')[-1] + "_out"
+    output_file_name = primer_output_file_name.split(QDir.separator())[-1] + "_out"
     window.primer3_out_file_name_label.setText(output_file_name)
     proc: QProcess = QProcess()
     proc.execute("primer3_core", [input_file_name, "--format_output", f"--output={output_file_name}"])
@@ -451,7 +451,7 @@ def primer3_run():
 def csv_generator():
     window.generate_csv_progressBar.setValue(0)
     counter = 0
-    input_file_name = primer_output_file_name.split('/')[-1] + "_out"
+    input_file_name = primer_output_file_name.split(QDir.separator())[-1] + "_out"
     output_file_name = input_file_name.split('.')[0] + ".csv"
     number_of_lines = lines_counter(input_file_name)
     with open(input_file_name, "r") as file_in:

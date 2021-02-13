@@ -375,18 +375,19 @@ def randomizer():
             primer = "".join(
                 random.choice('ACTG') for _ in range(length_of_primer)
             )
-            if check_runs(primer, runs_trigger):
-                if check_gc(primer, gc_min, gc_max, gc_trigger):
-                    if check_temp(primer, tm_min, tm_max, tm_trigger):
-                        if check_repeats(primer, rpts_trigger):
-                            f.write(primer + '\n')
-                            counter += 1
-                            app.processEvents()
-                            window.generate_progressBar.setValue(
-                                int(100 * counter / number_of_primers))
+            if is_primer_acceptable(primer):
+                f.write(primer + '\n')
+                counter += 1
+                app.processEvents()
+                window.generate_progressBar.setValue(int(100 * counter / number_of_primers))
             n += 1
 
     window.statusBar().showMessage(str(n) + " primers tested, ratio: " + str(number_of_primers / n), 10000)
+
+
+def is_primer_acceptable(primer: str) -> bool:
+    return check_runs(primer, runs_trigger) and check_gc(primer, gc_min, gc_max, gc_trigger) and \
+           check_temp(primer, tm_min, tm_max, tm_trigger) and check_repeats(primer, rpts_trigger)
 
 
 # --- primer3 input generator function

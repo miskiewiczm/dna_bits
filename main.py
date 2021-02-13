@@ -8,7 +8,7 @@ from typing import Dict, Callable, List, Union
 
 import pandas as pd
 import primer3
-from PySide2.QtCore import QProcess, QSize, Qt
+from PySide2.QtCore import QProcess, QSize, Qt, QDir
 from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog, QTableWidgetItem
 from PySide2.QtWidgets import QWidget
 
@@ -123,6 +123,7 @@ class Bits(QMainWindow, Ui_Bits):
         self.repeats_checkBox.stateChanged.connect(self.repeats_set)
 
         self.generator_start_button.clicked.connect(self.start_generate)
+        self.generator_output_edit.textChanged.connect(self.gen_file_name_changed)
         self.gen_input_edit.textChanged.connect(self.gen_input_file_changed)
 
         self.sequence_id_lineEdit.textChanged.connect(self.sequenceID_edit)
@@ -136,6 +137,7 @@ class Bits(QMainWindow, Ui_Bits):
         # file selectors
         self.fsh = FileSelectHelper(self)
         self.fsh.add_file_handler("generator_output", self.generator_output_button, self.generator_output_edit, 'txt')
+        self.fsh.add_file_handler("generator_input", self.gen_input_button, self.gen_input_edit, 'txt')
         self.fsh.add_file_handler("formatter_input", self.formatter_input_button, self.formatter_input_edit)
         self.fsh.add_file_handler("formatter_output", self.formatter_output_button, self.formatter_output_edit)
         self.fsh.add_file_handler(
@@ -158,6 +160,10 @@ class Bits(QMainWindow, Ui_Bits):
         self.generator_out_file_lineEdit.setText(gen_file_name.split('/')[-1])
         primer_input_file_name = gen_file_name
         self.file_in_label.setText(primer_input_file_name)
+
+    def gen_file_name_changed(self, filename):
+        global gen_file_name
+        gen_file_name = filename.split(QDir.separator())[-1]
 
     def gen_input_file_changed(self, filename):
         empty = len(filename) == 0

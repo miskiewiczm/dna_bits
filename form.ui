@@ -759,7 +759,7 @@
         <x>0</x>
         <y>10</y>
         <width>361</width>
-        <height>346</height>
+        <height>451</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="selector_form_layout">
@@ -813,7 +813,7 @@
        <item row="2" column="0" colspan="2">
         <widget class="QLabel" name="selector_info_label">
          <property name="text">
-          <string>Select the primer and close the preview window</string>
+          <string>Select primers and close the preview window</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -833,15 +833,31 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="selector_chosen_primer_label">
-         <property name="text">
-          <string>Chosen primers:</string>
+       <item row="4" column="1">
+        <widget class="QListWidget" name="selector_chosen_primer_list">
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+           <pointsize>12</pointsize>
+          </font>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QListWidget" name="selector_chosen_primer_list"/>
+       <item row="4" column="0">
+        <widget class="QLabel" name="selector_chosen_primer_label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Chosen primers:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

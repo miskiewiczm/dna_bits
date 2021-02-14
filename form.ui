@@ -441,7 +441,7 @@
         <x>20</x>
         <y>10</y>
         <width>331</width>
-        <height>21</height>
+        <height>24</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout">
@@ -759,7 +759,7 @@
         <x>0</x>
         <y>10</y>
         <width>361</width>
-        <height>301</height>
+        <height>346</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="selector_form_layout">

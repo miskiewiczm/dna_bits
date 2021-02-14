@@ -8,7 +8,7 @@ from typing import Dict, Callable, List, Union
 
 import pandas as pd
 import primer3
-from PySide2.QtCore import QProcess, QSize, Qt
+from PySide2.QtCore import QProcess, QSize, Qt, QDir
 from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog, QTableWidgetItem
 from PySide2.QtWidgets import QWidget
 
@@ -127,6 +127,8 @@ class Bits(QMainWindow, Ui_Bits):
         self.repeats_checkBox.stateChanged.connect(self.repeats_set)
 
         self.generator_start_button.clicked.connect(self.start_generate)
+        self.generator_output_edit.textChanged.connect(self.gen_file_name_changed)
+        self.gen_input_edit.textChanged.connect(self.gen_input_file_changed)
 
         self.sequence_id_lineEdit.textChanged.connect(self.sequenceID_edit)
         self.generate_pushButton.clicked.connect(self.primer3_input_generator)
@@ -139,6 +141,7 @@ class Bits(QMainWindow, Ui_Bits):
         # file selectors
         self.fsh = FileSelectHelper(self)
         self.fsh.add_file_handler("generator_output", self.generator_output_button, self.generator_output_edit, 'txt')
+        self.fsh.add_file_handler("generator_input", self.gen_input_button, self.gen_input_edit, 'txt')
         self.fsh.add_file_handler("formatter_input", self.formatter_input_button, self.formatter_input_edit)
         self.fsh.add_file_handler("formatter_output", self.formatter_output_button, self.formatter_output_edit)
         self.fsh.add_file_handler(
@@ -158,9 +161,18 @@ class Bits(QMainWindow, Ui_Bits):
         gen_file_name, _ = QFileDialog.getOpenFileName(
             self, "Generator Load File", "",
             "All Files (*);; Text filex (*.txt)")
-        self.generator_out_file_lineEdit.setText(gen_file_name.split('/')[-1])
+        self.generator_out_file_lineEdit.setText(gen_file_name.split(QDir.separator())[-1])
         primer_input_file_name = gen_file_name
         self.file_in_label.setText(primer_input_file_name)
+
+    def gen_file_name_changed(self, filename):
+        global gen_file_name
+        gen_file_name = filename.split(QDir.separator())[-1]
+
+    def gen_input_file_changed(self, filename):
+        empty = len(filename) == 0
+        self.numbers_of_primers.setEnabled(empty)
+        self.number_of_primers_spinBox.setEnabled(empty)
 
     def primers_length(self):
         global length_of_primer
@@ -204,10 +216,31 @@ class Bits(QMainWindow, Ui_Bits):
         global gc_max
         gc_max = self.gcmax_doubleSpinBox.value()
 
-    @staticmethod
-    def start_generate():
+    def start_generate(self):
         window.generate_progressBar.reset()
-        randomizer()
+        if len(self.gen_input_edit.text()) == 0:
+            randomizer()
+        else:
+            self.get_primers_from_file()
+
+    def get_primers_from_file(self):
+        file_path = self.gen_input_edit.text()
+        primer_len = self.primers_length_spinBox.value()
+
+        # file must contain only one line with gens' series
+        with open(file_path, 'r') as primers_input_file:
+            line = primers_input_file.read()
+            last_index = len(line) - primer_len
+
+            with open(f"{path}/{gen_file_name}", "w") as output:
+                for start_index in range(len(line) - primer_len):
+                    primer = line[start_index: start_index + primer_len]
+                    if is_primer_acceptable(primer):
+                        output.write(primer + '\n')
+
+                    self.generate_progress_bar.setValue(int((start_index / last_index) * 100))
+
+        self.generate_progress_bar.setValue(100)  # in some values it may display 99 at the end
 
     # --- formatter methods ---
 
@@ -216,7 +249,7 @@ class Bits(QMainWindow, Ui_Bits):
         primer_input_file_name, _ = QFileDialog.getOpenFileName(
             self, "Reformater Load File", "",
             "All Files (*);;Python Files (*.py)")
-        self.file_in_label.setText(primer_input_file_name.split('/')[-1])
+        self.file_in_label.setText(primer_input_file_name.split(QDir.separator())[-1])
         window.statusBar().showMessage(
             str(lines_counter(
                 primer_input_file_name)
@@ -228,7 +261,7 @@ class Bits(QMainWindow, Ui_Bits):
         primer_output_file_name, _ = QFileDialog.getOpenFileName(
             self, "Formatter Load File", "",
             "All Files (*);;Python Files (*.py)")
-        self.file_out_lineEdit.setText(primer_output_file_name.split('/')[-1])
+        self.file_out_lineEdit.setText(primer_output_file_name.split(QDir.separator())[-1])
 
     def save_lineEdit(self):
         global primer_output_file_name
@@ -373,18 +406,19 @@ def randomizer():
             primer = "".join(
                 random.choice('ACTG') for _ in range(length_of_primer)
             )
-            if check_runs(primer, runs_trigger):
-                if check_gc(primer, gc_min, gc_max, gc_trigger):
-                    if check_temp(primer, tm_min, tm_max, tm_trigger):
-                        if check_repeats(primer, rpts_trigger):
-                            f.write(primer + '\n')
-                            counter += 1
-                            app.processEvents()
-                            window.generate_progressBar.setValue(
-                                int(100 * counter / number_of_primers))
+            if is_primer_acceptable(primer):
+                f.write(primer + '\n')
+                counter += 1
+                app.processEvents()
+                window.generate_progressBar.setValue(int(100 * counter / number_of_primers))
             n += 1
 
     window.statusBar().showMessage(str(n) + " primers tested, ratio: " + str(number_of_primers / n), 10000)
+
+
+def is_primer_acceptable(primer: str) -> bool:
+    return check_runs(primer, runs_trigger) and check_gc(primer, gc_min, gc_max, gc_trigger) and \
+           check_temp(primer, tm_min, tm_max, tm_trigger) and check_repeats(primer, rpts_trigger)
 
 
 # --- primer3 input generator function
@@ -411,7 +445,7 @@ def primer3_input():
 def primer3_run():
     input_file_name = primer_output_file_name
     print(os.getcwd())
-    output_file_name = primer_output_file_name.split('/')[-1] + "_out"
+    output_file_name = primer_output_file_name.split(QDir.separator())[-1] + "_out"
     window.primer3_out_file_name_label.setText(output_file_name)
     proc: QProcess = QProcess()
     proc.execute("primer3_core", [input_file_name, "--format_output", f"--output={output_file_name}"])
@@ -421,7 +455,7 @@ def primer3_run():
 def csv_generator():
     window.generate_csv_progressBar.setValue(0)
     counter = 0
-    input_file_name = primer_output_file_name.split('/')[-1] + "_out"
+    input_file_name = primer_output_file_name.split(QDir.separator())[-1] + "_out"
     output_file_name = input_file_name.split('.')[0] + ".csv"
     number_of_lines = lines_counter(input_file_name)
     with open(input_file_name, "r") as file_in:

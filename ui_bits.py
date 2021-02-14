@@ -328,11 +328,19 @@ class Ui_Bits(object):
         __qtablewidgetitem2 = QTableWidgetItem()
         self.selector_sorter_table.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         self.selector_sorter_table.setObjectName(u"selector_sorter_table")
+        self.selector_sorter_table.setMinimumSize(QSize(0, 175))
         self.selector_sorter_table.setRowCount(0)
         self.selector_sorter_table.setColumnCount(3)
         self.selector_sorter_table.horizontalHeader().setStretchLastSection(True)
 
         self.selector_form_layout.setWidget(1, QFormLayout.SpanningRole, self.selector_sorter_table)
+
+        self.selector_info_label = QLabel(self.formLayoutWidget_2)
+        self.selector_info_label.setObjectName(u"selector_info_label")
+        self.selector_info_label.setAlignment(Qt.AlignCenter)
+        self.selector_info_label.setWordWrap(True)
+
+        self.selector_form_layout.setWidget(2, QFormLayout.SpanningRole, self.selector_info_label)
 
         self.selector_preview_button = QPushButton(self.formLayoutWidget_2)
         self.selector_preview_button.setObjectName(u"selector_preview_button")
@@ -345,17 +353,10 @@ class Ui_Bits(object):
 
         self.selector_form_layout.setWidget(4, QFormLayout.LabelRole, self.selector_chosen_primer_label)
 
-        self.selector_chosen_primer_edit = QLineEdit(self.formLayoutWidget_2)
-        self.selector_chosen_primer_edit.setObjectName(u"selector_chosen_primer_edit")
+        self.selector_chosen_primer_list = QListWidget(self.formLayoutWidget_2)
+        self.selector_chosen_primer_list.setObjectName(u"selector_chosen_primer_list")
 
-        self.selector_form_layout.setWidget(4, QFormLayout.FieldRole, self.selector_chosen_primer_edit)
-
-        self.label = QLabel(self.formLayoutWidget_2)
-        self.label.setObjectName(u"label")
-        self.label.setAlignment(Qt.AlignCenter)
-        self.label.setWordWrap(True)
-
-        self.selector_form_layout.setWidget(2, QFormLayout.SpanningRole, self.label)
+        self.selector_form_layout.setWidget(4, QFormLayout.FieldRole, self.selector_chosen_primer_list)
 
         self.toolBox.addItem(self.selector_page, u"Selector")
         self.composer_page = QWidget()
@@ -454,8 +455,8 @@ class Ui_Bits(object):
         ___qtablewidgetitem2 = self.selector_sorter_table.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Bits", u"Order", None));
         self.selector_preview_button.setText(QCoreApplication.translate("Bits", u"Preview", None))
-        self.selector_chosen_primer_label.setText(QCoreApplication.translate("Bits", u"Chosen primer:", None))
         self.label.setText(QCoreApplication.translate("Bits", u"Select the primer and close the preview window", None))
+        self.selector_chosen_primer_label.setText(QCoreApplication.translate("Bits", u"Chosen primers:", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.selector_page), QCoreApplication.translate("Bits", u"Selector", None))
         self.composer_bits_label.setText(QCoreApplication.translate("Bits", u"Bits:", None))
         self.composer_bits_content.setPlaceholderText(QCoreApplication.translate("Bits", u"01011011", None))

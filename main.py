@@ -92,10 +92,14 @@ class CSV_Viewer(QWidget, Ui_CSV_Viewer):
         self.setAttribute(Qt.WA_QuitOnClose, False)
 
     def closeEvent(self, event):
-        row = self.csv_table.currentItem().row()
-        item = self.csv_table.item(row, 0)
-        primer = item.text()
-        self.parent.selector_chosen_primer_edit.setText(primer)
+        self.parent.selector_chosen_primer_list.clear()
+
+        for item in self.csv_table.selectedItems():
+            row = item.row()
+            col = self.csv_table.item(row, 0)
+            primer = col.text()
+            self.parent.selector_chosen_primer_list.addItem(primer)
+
         event.accept()
 
 

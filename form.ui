@@ -778,6 +778,12 @@
        </item>
        <item row="1" column="0" colspan="2">
         <widget class="QTableWidget" name="selector_sorter_table">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>175</height>
+          </size>
+         </property>
          <property name="rowCount">
           <number>0</number>
          </property>
@@ -804,6 +810,19 @@
          </column>
         </widget>
        </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="selector_info_label">
+         <property name="text">
+          <string>Select the primer and close the preview window</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="0" colspan="2">
         <widget class="QPushButton" name="selector_preview_button">
          <property name="enabled">
@@ -817,25 +836,12 @@
        <item row="4" column="0">
         <widget class="QLabel" name="selector_chosen_primer_label">
          <property name="text">
-          <string>Chosen primer:</string>
+          <string>Chosen primers:</string>
          </property>
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QLineEdit" name="selector_chosen_primer_edit"/>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Select the primer and close the preview window</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
+        <widget class="QListWidget" name="selector_chosen_primer_list"/>
        </item>
       </layout>
      </widget>

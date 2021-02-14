@@ -466,6 +466,7 @@ class Ui_Bits(object):
 
         self.composer_manual_s_combo = QComboBox(self.formLayoutWidget)
         self.composer_manual_s_combo.setObjectName(u"composer_manual_s_combo")
+        self.composer_manual_s_combo.setEnabled(False)
 
         self.composer_form_layout.setWidget(6, QFormLayout.FieldRole, self.composer_manual_s_combo)
 
@@ -476,6 +477,7 @@ class Ui_Bits(object):
 
         self.composer_manual_e_combo = QComboBox(self.formLayoutWidget)
         self.composer_manual_e_combo.setObjectName(u"composer_manual_e_combo")
+        self.composer_manual_e_combo.setEnabled(False)
 
         self.composer_form_layout.setWidget(7, QFormLayout.FieldRole, self.composer_manual_e_combo)
 
@@ -486,6 +488,7 @@ class Ui_Bits(object):
 
         self.composer_manual_0_combo = QComboBox(self.formLayoutWidget)
         self.composer_manual_0_combo.setObjectName(u"composer_manual_0_combo")
+        self.composer_manual_0_combo.setEnabled(False)
 
         self.composer_form_layout.setWidget(8, QFormLayout.FieldRole, self.composer_manual_0_combo)
 
@@ -496,6 +499,7 @@ class Ui_Bits(object):
 
         self.composer_manual_1_combo = QComboBox(self.formLayoutWidget)
         self.composer_manual_1_combo.setObjectName(u"composer_manual_1_combo")
+        self.composer_manual_1_combo.setEnabled(False)
 
         self.composer_form_layout.setWidget(9, QFormLayout.FieldRole, self.composer_manual_1_combo)
 

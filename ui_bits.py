@@ -349,18 +349,11 @@ class Ui_Bits(object):
         self.selector_form_layout.setWidget(3, QFormLayout.SpanningRole, self.selector_preview_button)
 
         self.selector_chosen_primer_list = QListWidget(self.formLayoutWidget_2)
-        font2 = QFont()
-        font2.setFamily(u"Inconsolata")
-        font2.setPointSize(12)
-        __qlistwidgetitem = QListWidgetItem(self.selector_chosen_primer_list)
-        __qlistwidgetitem.setFont(font2);
-        __qlistwidgetitem1 = QListWidgetItem(self.selector_chosen_primer_list)
-        __qlistwidgetitem1.setFont(font2);
         self.selector_chosen_primer_list.setObjectName(u"selector_chosen_primer_list")
-        font3 = QFont()
-        font3.setFamily(u"Monospace")
-        font3.setPointSize(12)
-        self.selector_chosen_primer_list.setFont(font3)
+        font2 = QFont()
+        font2.setFamily(u"Monospace")
+        font2.setPointSize(12)
+        self.selector_chosen_primer_list.setFont(font2)
 
         self.selector_form_layout.setWidget(4, QFormLayout.FieldRole, self.selector_chosen_primer_list)
 
@@ -371,7 +364,6 @@ class Ui_Bits(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.selector_chosen_primer_label.sizePolicy().hasHeightForWidth())
         self.selector_chosen_primer_label.setSizePolicy(sizePolicy1)
-        self.selector_chosen_primer_label.setMinimumSize(QSize(0, 0))
         self.selector_chosen_primer_label.setAlignment(Qt.AlignCenter)
 
         self.selector_form_layout.setWidget(4, QFormLayout.LabelRole, self.selector_chosen_primer_label)
@@ -474,15 +466,6 @@ class Ui_Bits(object):
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Bits", u"Order", None));
         self.selector_info_label.setText(QCoreApplication.translate("Bits", u"Select primers and close the preview window", None))
         self.selector_preview_button.setText(QCoreApplication.translate("Bits", u"Preview", None))
-
-        __sortingEnabled = self.selector_chosen_primer_list.isSortingEnabled()
-        self.selector_chosen_primer_list.setSortingEnabled(False)
-        ___qlistwidgetitem = self.selector_chosen_primer_list.item(0)
-        ___qlistwidgetitem.setText(QCoreApplication.translate("Bits", u"GCATGTCGACGAATTACACC", None));
-        ___qlistwidgetitem1 = self.selector_chosen_primer_list.item(1)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("Bits", u"GCATGTCGACGAATTACACC", None));
-        self.selector_chosen_primer_list.setSortingEnabled(__sortingEnabled)
-
         self.selector_chosen_primer_label.setText(QCoreApplication.translate("Bits", u"Chosen primers:", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.selector_page), QCoreApplication.translate("Bits", u"Selector", None))
         self.composer_bits_label.setText(QCoreApplication.translate("Bits", u"Bits:", None))

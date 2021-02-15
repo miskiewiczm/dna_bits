@@ -421,6 +421,7 @@ class Ui_Bits(object):
         self.composer_form_layout.setWidget(2, QFormLayout.SpanningRole, self.composer_search_button)
 
         self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setSpacing(10)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, -1, -1)
         self.composer_save_button = QPushButton(self.formLayoutWidget)

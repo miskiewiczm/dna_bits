@@ -33,7 +33,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="title_page">
      <property name="geometry">
@@ -946,6 +946,9 @@
        </item>
        <item row="3" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+           <number>10</number>
+         </property>
          <property name="leftMargin">
           <number>0</number>
          </property>

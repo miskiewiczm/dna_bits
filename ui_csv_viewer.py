@@ -29,7 +29,6 @@ class Ui_CSV_Viewer(object):
         self.csv_table.setObjectName(u"csv_table")
         self.csv_table.setFrameShape(QFrame.StyledPanel)
         self.csv_table.setFrameShadow(QFrame.Sunken)
-        self.csv_table.setColumnCount(6)
         self.retranslateUi(CSV_Viewer)
 
         QMetaObject.connectSlotsByName(CSV_Viewer)

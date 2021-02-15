@@ -4,6 +4,7 @@ import csv
 import os
 import random
 import sys
+from enum import Enum
 from typing import Dict, Callable, List, Union
 
 import pandas as pd
@@ -45,6 +46,9 @@ pnc = 50.0
 
 number_of_lines = 0
 
+# Composer variable
+composer_selected_primer = ()
+
 
 class FileSelectHelper:
     data: Dict = {}
@@ -84,21 +88,35 @@ class FileSelectHelper:
 
 
 class CSV_Viewer(QWidget, Ui_CSV_Viewer):
+    class CsvViewerMode(Enum):
+        cvmSelector = 1,
+        cvmComposer = 2
+
     def __init__(self, parent):
         super(CSV_Viewer, self).__init__()
         self.setupUi(self)
         self.parent = parent
+        self.mode = None
 
         self.setAttribute(Qt.WA_QuitOnClose, False)
 
     def closeEvent(self, event):
-        self.parent.selector_chosen_primer_list.clear()
+        if self.mode == CSV_Viewer.CsvViewerMode.cvmSelector:
+            self.parent.selector_chosen_primer_list.clear()
 
-        for item in self.csv_table.selectedItems():
-            row = item.row()
-            col = self.csv_table.item(row, 0)
-            primer = col.text()
-            self.parent.selector_chosen_primer_list.addItem(primer)
+            for item in self.csv_table.selectedItems():
+                row = item.row()
+                col = self.csv_table.item(row, 0)
+                primer = col.text()
+                self.parent.selector_chosen_primer_list.addItem(primer)
+        elif self.mode == CSV_Viewer.CsvViewerMode.cvmComposer:
+            if len(self.csv_table.selectedItems()) > 0:
+                # If more items ar selected, take first
+                row = self.csv_table.selectedItems()[0].row()
+                key = self.csv_table.item(row, 0).text()
+                value = self.csv_table.item(row, 1).text().split(', ')
+                global composer_selected_primer
+                composer_selected_primer = (key, value)
 
         event.accept()
 
@@ -112,8 +130,7 @@ class Bits(QMainWindow, Ui_Bits):
         self.setFixedSize(QSize(422, 715))
 
         self.primers_length_spinBox.valueChanged.connect(self.primers_length)
-        self.number_of_primers_spinBox.valueChanged.connect(
-            self.numbers__primers)
+        self.number_of_primers_spinBox.valueChanged.connect(self.numbers__primers)
 
         self.temp_groupBox.toggled.connect(self.temp_set)
         self.tmmin_doubleSpinBox.valueChanged.connect(self.value_change_tmmi)
@@ -137,6 +154,8 @@ class Bits(QMainWindow, Ui_Bits):
 
         self.prepare_selector_sorter_table()
         self.selector_preview_button.clicked.connect(self.csv_preview)
+
+        self.composer_select_button.clicked.connect(self.composer_primers_preview)
 
         # file selectors
         self.fsh = FileSelectHelper(self)
@@ -278,6 +297,7 @@ class Bits(QMainWindow, Ui_Bits):
     def csv_preview(self):
         with open(self.fsh['selector_input'], "r") as csv_file:
             reader = csv.DictReader(csv_file)
+            csv_window.mode = CSV_Viewer.CsvViewerMode.cvmSelector
             csv_window.csv_table.setRowCount(0)
 
             csv_data = []
@@ -286,6 +306,7 @@ class Bits(QMainWindow, Ui_Bits):
 
             header = reader.fieldnames
             header[-1] = header[-1][0:-1]
+            csv_window.csv_table.setColumnCount(len(header))
             csv_window.csv_table.setHorizontalHeaderLabels(header)
 
             sort_by = []
@@ -341,6 +362,26 @@ class Bits(QMainWindow, Ui_Bits):
             self.selector_sorter_table.setCellWidget(i, 2, ComboOrderWidget(self))
 
         self.selector_sorter_table.resizeColumnToContents(0)
+
+    def composer_primers_preview(self):
+        csv_window.mode = CSV_Viewer.CsvViewerMode.cvmComposer
+        csv_window.csv_table.setRowCount(0)
+        header_labels = ["Primer", "Matched primers"]
+        csv_window.csv_table.setColumnCount(len(header_labels))
+        csv_window.csv_table.setHorizontalHeaderLabels(header_labels)
+
+        # FIXME: There should by data processed after 'Search' button is clicked
+        test = {"ACTG": ["CAGT", "CAGT"], "GTCA": ["CGAC", "CGAC"]}
+
+        row = 0
+        for data in zip(test.keys(), test.values()):
+            csv_window.csv_table.insertRow(row)
+            csv_window.csv_table.setItem(row, 0, QTableWidgetItem(data[0]))
+            csv_window.csv_table.setItem(row, 1, QTableWidgetItem(", ".join(data[1])))
+
+            row += 1
+
+        csv_window.show()
 
 
 # --- * ---

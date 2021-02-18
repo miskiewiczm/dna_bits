@@ -16,6 +16,7 @@ from PySide2.QtWidgets import QWidget
 from table_items_widgets import ComboOrderWidget, SpinBoxWidget, CheckBoxWidget
 from ui_bits import Ui_Bits
 from ui_csv_viewer import Ui_CSV_Viewer
+from primer_cross import PrimerCross
 
 # Generator variables
 # Global variables for primers
@@ -47,7 +48,6 @@ pnc = 50.0
 number_of_lines = 0
 
 # Composer variable
-composer_selected_primer = ()
 
 
 class FileSelectHelper:
@@ -103,12 +103,14 @@ class CSV_Viewer(QWidget, Ui_CSV_Viewer):
     def closeEvent(self, event):
         if self.mode == CSV_Viewer.CsvViewerMode.cvmSelector:
             self.parent.selector_chosen_primer_list.clear()
+            self.parent.selected_primers = []
 
             for item in self.csv_table.selectedItems():
                 row = item.row()
                 col = self.csv_table.item(row, 0)
                 primer = col.text()
                 self.parent.selector_chosen_primer_list.addItem(primer)
+                self.parent.selected_primers.append(primer)
         elif self.mode == CSV_Viewer.CsvViewerMode.cvmComposer:
             if len(self.csv_table.selectedItems()) > 0:
                 # If more items ar selected, take first
@@ -118,11 +120,29 @@ class CSV_Viewer(QWidget, Ui_CSV_Viewer):
                 global composer_selected_primer
                 composer_selected_primer = (key, value)
 
+                # fill combos
+                # FIXME add empty for auto assign of S E 0 1
+                # tabela select id, primer, liczba znalezionych
+                # przycisk Search na Compute
+                # status bar stan wyliczania start/koniec
+                # spinbox przekrycie minimalnego
+                self.parent.composer_manual_s_combo.addItems(value)
+                self.parent.composer_manual_s_combo.setEnabled(True)
+                self.parent.composer_manual_e_combo.addItems(value)
+                self.parent.composer_manual_e_combo.setEnabled(True)
+                self.parent.composer_manual_0_combo.addItems(value)
+                self.parent.composer_manual_0_combo.setEnabled(True)
+                self.parent.composer_manual_1_combo.addItems(value)
+                self.parent.composer_manual_1_combo.setEnabled(True)
+
         event.accept()
 
 
 class Bits(QMainWindow, Ui_Bits):
     CSV_PARAMETERS = ("any_th", "3p_th", "hairpin_th", "gc_per", "tm")
+    selected_primers = []
+    composer_selected_primer = ()
+    composer_cross_preview_data: Dict[str, List[str]] = {}
 
     def __init__(self):
         super(Bits, self).__init__()
@@ -169,6 +189,16 @@ class Bits(QMainWindow, Ui_Bits):
             self.selector_input_edit, 'csv',
             FileSelectHelper.callback_button_enabled(self.selector_preview_button))
         self.fsh.add_file_handler("composer_output", self.composer_output_button, self.composer_output_edit)
+
+        # composer buttons
+        self.composer_search_button.clicked.connect(self.composer_search_button_clicked)
+
+    def composer_search_button_clicked(self):
+        pc = PrimerCross(self.selected_primers)
+        cross = pc.generate_cross()
+        best = pc.best(cross)
+        best_str = pc.best_to_str(best)
+        self.composer_cross_preview_data = best_str
 
     def gen_file_name_changed(self):
         global gen_file_name
@@ -370,11 +400,15 @@ class Bits(QMainWindow, Ui_Bits):
         csv_window.csv_table.setColumnCount(len(header_labels))
         csv_window.csv_table.setHorizontalHeaderLabels(header_labels)
 
-        # FIXME: There should by data processed after 'Search' button is clicked
-        test = {"ACTG": ["CAGT", "CAGT"], "GTCA": ["CGAC", "CGAC"]}
+        # primer ids
+        # TODO shift ids by one
+        primer_ids: List[str] = []  # TODO
+        csv_window.csv_table.setVerticalHeaderLabels(primer_ids)
+
+        preview_data = self.composer_cross_preview_data
 
         row = 0
-        for data in zip(test.keys(), test.values()):
+        for data in zip(preview_data.keys(), preview_data.values()):
             csv_window.csv_table.insertRow(row)
             csv_window.csv_table.setItem(row, 0, QTableWidgetItem(data[0]))
             csv_window.csv_table.setItem(row, 1, QTableWidgetItem(", ".join(data[1])))

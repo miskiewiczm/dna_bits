@@ -384,7 +384,7 @@ class Ui_Bits(object):
         self.composer_page.setGeometry(QRect(0, 0, 373, 497))
         self.formLayoutWidget = QWidget(self.composer_page)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
-        self.formLayoutWidget.setGeometry(QRect(10, 20, 351, 466))
+        self.formLayoutWidget.setGeometry(QRect(10, 20, 351, 469))
         self.composer_form_layout = QFormLayout(self.formLayoutWidget)
         self.composer_form_layout.setObjectName(u"composer_form_layout")
         self.composer_form_layout.setLabelAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
@@ -418,7 +418,7 @@ class Ui_Bits(object):
         self.composer_search_button = QPushButton(self.formLayoutWidget)
         self.composer_search_button.setObjectName(u"composer_search_button")
 
-        self.composer_form_layout.setWidget(2, QFormLayout.SpanningRole, self.composer_search_button)
+        self.composer_form_layout.setWidget(3, QFormLayout.SpanningRole, self.composer_search_button)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(10)
@@ -435,17 +435,17 @@ class Ui_Bits(object):
         self.horizontalLayout.addWidget(self.composer_select_button)
 
 
-        self.composer_form_layout.setLayout(3, QFormLayout.SpanningRole, self.horizontalLayout)
+        self.composer_form_layout.setLayout(4, QFormLayout.SpanningRole, self.horizontalLayout)
 
         self.composer_output_button = QPushButton(self.formLayoutWidget)
         self.composer_output_button.setObjectName(u"composer_output_button")
 
-        self.composer_form_layout.setWidget(4, QFormLayout.LabelRole, self.composer_output_button)
+        self.composer_form_layout.setWidget(5, QFormLayout.LabelRole, self.composer_output_button)
 
         self.composer_output_edit = QLineEdit(self.formLayoutWidget)
         self.composer_output_edit.setObjectName(u"composer_output_edit")
 
-        self.composer_form_layout.setWidget(4, QFormLayout.FieldRole, self.composer_output_edit)
+        self.composer_form_layout.setWidget(5, QFormLayout.FieldRole, self.composer_output_edit)
 
         self.title_down_line_2 = QFrame(self.formLayoutWidget)
         self.title_down_line_2.setObjectName(u"title_down_line_2")
@@ -458,66 +458,82 @@ class Ui_Bits(object):
         self.title_down_line_2.setFrameShape(QFrame.HLine)
         self.title_down_line_2.setFrameShadow(QFrame.Sunken)
 
-        self.composer_form_layout.setWidget(5, QFormLayout.SpanningRole, self.title_down_line_2)
+        self.composer_form_layout.setWidget(6, QFormLayout.SpanningRole, self.title_down_line_2)
 
         self.composer_manual_s_label = QLabel(self.formLayoutWidget)
         self.composer_manual_s_label.setObjectName(u"composer_manual_s_label")
 
-        self.composer_form_layout.setWidget(6, QFormLayout.LabelRole, self.composer_manual_s_label)
+        self.composer_form_layout.setWidget(7, QFormLayout.LabelRole, self.composer_manual_s_label)
 
         self.composer_manual_s_combo = QComboBox(self.formLayoutWidget)
         self.composer_manual_s_combo.setObjectName(u"composer_manual_s_combo")
         self.composer_manual_s_combo.setEnabled(False)
 
-        self.composer_form_layout.setWidget(6, QFormLayout.FieldRole, self.composer_manual_s_combo)
+        self.composer_form_layout.setWidget(7, QFormLayout.FieldRole, self.composer_manual_s_combo)
 
         self.composer_manual_e_label = QLabel(self.formLayoutWidget)
         self.composer_manual_e_label.setObjectName(u"composer_manual_e_label")
 
-        self.composer_form_layout.setWidget(7, QFormLayout.LabelRole, self.composer_manual_e_label)
+        self.composer_form_layout.setWidget(8, QFormLayout.LabelRole, self.composer_manual_e_label)
 
         self.composer_manual_e_combo = QComboBox(self.formLayoutWidget)
         self.composer_manual_e_combo.setObjectName(u"composer_manual_e_combo")
         self.composer_manual_e_combo.setEnabled(False)
 
-        self.composer_form_layout.setWidget(7, QFormLayout.FieldRole, self.composer_manual_e_combo)
+        self.composer_form_layout.setWidget(8, QFormLayout.FieldRole, self.composer_manual_e_combo)
 
         self.composer_manual_0_label = QLabel(self.formLayoutWidget)
         self.composer_manual_0_label.setObjectName(u"composer_manual_0_label")
 
-        self.composer_form_layout.setWidget(8, QFormLayout.LabelRole, self.composer_manual_0_label)
+        self.composer_form_layout.setWidget(9, QFormLayout.LabelRole, self.composer_manual_0_label)
 
         self.composer_manual_0_combo = QComboBox(self.formLayoutWidget)
         self.composer_manual_0_combo.setObjectName(u"composer_manual_0_combo")
         self.composer_manual_0_combo.setEnabled(False)
 
-        self.composer_form_layout.setWidget(8, QFormLayout.FieldRole, self.composer_manual_0_combo)
+        self.composer_form_layout.setWidget(9, QFormLayout.FieldRole, self.composer_manual_0_combo)
 
         self.composer_manual_1_label = QLabel(self.formLayoutWidget)
         self.composer_manual_1_label.setObjectName(u"composer_manual_1_label")
 
-        self.composer_form_layout.setWidget(9, QFormLayout.LabelRole, self.composer_manual_1_label)
+        self.composer_form_layout.setWidget(10, QFormLayout.LabelRole, self.composer_manual_1_label)
 
         self.composer_manual_1_combo = QComboBox(self.formLayoutWidget)
         self.composer_manual_1_combo.setObjectName(u"composer_manual_1_combo")
         self.composer_manual_1_combo.setEnabled(False)
 
-        self.composer_form_layout.setWidget(9, QFormLayout.FieldRole, self.composer_manual_1_combo)
+        self.composer_form_layout.setWidget(10, QFormLayout.FieldRole, self.composer_manual_1_combo)
 
         self.composer_run_button = QPushButton(self.formLayoutWidget)
         self.composer_run_button.setObjectName(u"composer_run_button")
 
-        self.composer_form_layout.setWidget(11, QFormLayout.SpanningRole, self.composer_run_button)
+        self.composer_form_layout.setWidget(12, QFormLayout.SpanningRole, self.composer_run_button)
 
         self.composer_output2_button = QPushButton(self.formLayoutWidget)
         self.composer_output2_button.setObjectName(u"composer_output2_button")
 
-        self.composer_form_layout.setWidget(10, QFormLayout.LabelRole, self.composer_output2_button)
+        self.composer_form_layout.setWidget(11, QFormLayout.LabelRole, self.composer_output2_button)
 
         self.composer_output2_edit = QLineEdit(self.formLayoutWidget)
         self.composer_output2_edit.setObjectName(u"composer_output2_edit")
 
-        self.composer_form_layout.setWidget(10, QFormLayout.FieldRole, self.composer_output2_edit)
+        self.composer_form_layout.setWidget(11, QFormLayout.FieldRole, self.composer_output2_edit)
+
+        self.composer_maxscore_hlayout = QHBoxLayout()
+        self.composer_maxscore_hlayout.setSpacing(223)
+        self.composer_maxscore_hlayout.setObjectName(u"composer_maxscore_hlayout")
+        self.composer_maxscore_label = QLabel(self.formLayoutWidget)
+        self.composer_maxscore_label.setObjectName(u"composer_maxscore_label")
+
+        self.composer_maxscore_hlayout.addWidget(self.composer_maxscore_label)
+
+        self.composer_maxscore_spinBox = QSpinBox(self.formLayoutWidget)
+        self.composer_maxscore_spinBox.setObjectName(u"composer_maxscore_spinBox")
+
+        self.composer_maxscore_hlayout.addWidget(self.composer_maxscore_spinBox)
+
+
+        self.composer_form_layout.setLayout(2, QFormLayout.SpanningRole, self.composer_maxscore_hlayout)
 
         self.toolBox.addItem(self.composer_page, u"Composer")
         Bits.setCentralWidget(self.centralwidget)
@@ -600,6 +616,7 @@ class Ui_Bits(object):
         self.composer_manual_1_label.setText(QCoreApplication.translate("Bits", u"Bit \"1\":", None))
         self.composer_run_button.setText(QCoreApplication.translate("Bits", u"Compose", None))
         self.composer_output2_button.setText(QCoreApplication.translate("Bits", u"Output file", None))
+        self.composer_maxscore_label.setText(QCoreApplication.translate("Bits", u"Max score:", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.composer_page), QCoreApplication.translate("Bits", u"Composer", None))
     # retranslateUi
 

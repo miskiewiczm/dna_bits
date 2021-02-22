@@ -173,8 +173,6 @@ class Bits(QMainWindow, Ui_Bits):
         self.prepare_selector_sorter_table()
         self.selector_preview_button.clicked.connect(self.csv_preview)
 
-        self.composer_select_button.clicked.connect(self.composer_primers_preview)
-
         # file selectors
         self.fsh = FileSelectHelper(self)
         self.fsh.add_file_handler("generator_output", self.generator_output_button, self.generator_output_edit, 'txt')
@@ -191,10 +189,11 @@ class Bits(QMainWindow, Ui_Bits):
         self.fsh.add_file_handler("composer_output2", self.composer_output2_button, self.composer_output2_edit, "txt")
 
         # composer buttons
-        self.composer_search_button.clicked.connect(self.composer_search_button_clicked)
+        self.composer_compute_button.clicked.connect(self.composer_compute_button_clicked)
         self.composer_bits_content.textChanged.connect(self.composer_bits_changed)
+        self.composer_select_button.clicked.connect(self.composer_primers_preview)
 
-    def composer_search_button_clicked(self):
+    def composer_compute_button_clicked(self):
         self.statusBar().showMessage("Computing cross matrix. Please wait...")
         self.repaint()  # need to call because gui may get blocked before refreshing
         pc = PrimerCross(self.selected_primers)

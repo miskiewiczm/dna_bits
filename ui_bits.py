@@ -433,10 +433,10 @@ class Ui_Bits(object):
 
         self.composer_form_layout.setLayout(2, QFormLayout.SpanningRole, self.composer_maxscore_hlayout)
 
-        self.composer_search_button = QPushButton(self.formLayoutWidget)
-        self.composer_search_button.setObjectName(u"composer_search_button")
+        self.composer_compute_button = QPushButton(self.formLayoutWidget)
+        self.composer_compute_button.setObjectName(u"composer_compute_button")
 
-        self.composer_form_layout.setWidget(3, QFormLayout.SpanningRole, self.composer_search_button)
+        self.composer_form_layout.setWidget(3, QFormLayout.SpanningRole, self.composer_compute_button)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(10)
@@ -609,7 +609,7 @@ class Ui_Bits(object):
         self.composer_bits_label.setText(QCoreApplication.translate("Bits", u"Bits:", None))
         self.composer_bits_content.setPlaceholderText(QCoreApplication.translate("Bits", u"01011011", None))
         self.composer_maxscore_label.setText(QCoreApplication.translate("Bits", u"Max score:", None))
-        self.composer_search_button.setText(QCoreApplication.translate("Bits", u"Compute", None))
+        self.composer_compute_button.setText(QCoreApplication.translate("Bits", u"Compute", None))
         self.composer_save_button.setText(QCoreApplication.translate("Bits", u"Save", None))
         self.composer_select_button.setText(QCoreApplication.translate("Bits", u"Select", None))
         self.composer_output_button.setText(QCoreApplication.translate("Bits", u"Output file", None))

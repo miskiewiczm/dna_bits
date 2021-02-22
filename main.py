@@ -190,9 +190,9 @@ class Bits(QMainWindow, Ui_Bits):
         self.fsh.add_file_handler("composer_output", self.composer_output_button, self.composer_output_edit, "txt")
         self.fsh.add_file_handler("composer_output2", self.composer_output2_button, self.composer_output2_edit, "txt")
 
-
         # composer buttons
         self.composer_search_button.clicked.connect(self.composer_search_button_clicked)
+        self.composer_bits_content.textChanged.connect(self.composer_bits_changed)
 
     def composer_search_button_clicked(self):
         pc = PrimerCross(self.selected_primers)
@@ -200,6 +200,9 @@ class Bits(QMainWindow, Ui_Bits):
         best = pc.best(cross)
         best_str = pc.best_to_str(best)
         self.composer_cross_preview_data = best_str
+
+    def composer_bits_changed(self):
+        self.composer_maxscore_spinBox.setMaximum(len(self.composer_bits_content.toPlainText()))
 
     def gen_file_name_changed(self):
         global gen_file_name

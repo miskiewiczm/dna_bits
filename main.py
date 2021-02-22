@@ -195,11 +195,18 @@ class Bits(QMainWindow, Ui_Bits):
         self.composer_bits_content.textChanged.connect(self.composer_bits_changed)
 
     def composer_search_button_clicked(self):
+        self.statusBar().showMessage("Computing cross matrix. Please wait...")
+        self.repaint()  # need to call because gui may get blocked before refreshing
         pc = PrimerCross(self.selected_primers)
         cross = pc.generate_cross()
+
+        self.statusBar().showMessage("Computing primers' score. Please wait...")
+        self.repaint()
         best = pc.best(cross)
         best_str = pc.best_to_str(best)
         self.composer_cross_preview_data = best_str
+
+        self.statusBar().clearMessage()
 
     def composer_bits_changed(self):
         self.composer_maxscore_spinBox.setMaximum(len(self.composer_bits_content.toPlainText()))

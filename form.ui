@@ -897,7 +897,7 @@
         <x>10</x>
         <y>20</y>
         <width>351</width>
-        <height>469</height>
+        <height>473</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="composer_form_layout">
@@ -905,7 +905,7 @@
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
        <property name="verticalSpacing">
-        <number>10</number>
+        <number>8</number>
        </property>
        <item row="0" column="0">
         <widget class="QPushButton" name="composer_input_button">
@@ -932,10 +932,37 @@
        </item>
        <item row="1" column="1">
         <widget class="QPlainTextEdit" name="composer_bits_content">
+         <property name="maximumSize">
+          <size>
+           <width>500</width>
+           <height>60</height>
+          </size>
+         </property>
          <property name="placeholderText">
           <string>01011011</string>
          </property>
         </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="composer_maxscore_hlayout">
+         <property name="spacing">
+          <number>223</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="composer_maxscore_label">
+           <property name="text">
+            <string>Max score:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="composer_maxscore_spinBox">
+           <property name="maximum">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item row="3" column="0" colspan="2">
         <widget class="QPushButton" name="composer_search_button">
@@ -1072,23 +1099,6 @@
        </item>
        <item row="11" column="1">
         <widget class="QLineEdit" name="composer_output2_edit"/>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="composer_maxscore_hlayout">
-         <property name="spacing">
-          <number>223</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="composer_maxscore_label">
-           <property name="text">
-            <string>Max score:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="composer_maxscore_spinBox"/>
-         </item>
-        </layout>
        </item>
       </layout>
      </widget>

@@ -13,10 +13,10 @@ from PySide2.QtCore import QProcess, QSize, Qt, QDir
 from PySide2.QtWidgets import QMainWindow, QApplication, QFileDialog, QTableWidgetItem
 from PySide2.QtWidgets import QWidget
 
+from primer_cross import PrimerCross
 from table_items_widgets import ComboOrderWidget, SpinBoxWidget, CheckBoxWidget
 from ui_bits import Ui_Bits
 from ui_csv_viewer import Ui_CSV_Viewer
-from primer_cross import PrimerCross
 
 # Generator variables
 # Global variables for primers
@@ -46,8 +46,6 @@ pdc = 0.5
 pnc = 50.0
 
 number_of_lines = 0
-
-# Composer variable
 
 
 class FileSelectHelper:
@@ -188,7 +186,10 @@ class Bits(QMainWindow, Ui_Bits):
             self.selector_input_button,
             self.selector_input_edit, 'csv',
             FileSelectHelper.callback_button_enabled(self.selector_preview_button))
-        self.fsh.add_file_handler("composer_output", self.composer_output_button, self.composer_output_edit)
+        self.fsh.add_file_handler("composer_input", self.composer_input_button, self.composer_input_edit, "txt")
+        self.fsh.add_file_handler("composer_output", self.composer_output_button, self.composer_output_edit, "txt")
+        self.fsh.add_file_handler("composer_output2", self.composer_output2_button, self.composer_output2_edit, "txt")
+
 
         # composer buttons
         self.composer_search_button.clicked.connect(self.composer_search_button_clicked)

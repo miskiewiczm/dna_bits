@@ -609,7 +609,7 @@ class Ui_Bits(object):
         self.composer_bits_label.setText(QCoreApplication.translate("Bits", u"Bits:", None))
         self.composer_bits_content.setPlaceholderText(QCoreApplication.translate("Bits", u"01011011", None))
         self.composer_maxscore_label.setText(QCoreApplication.translate("Bits", u"Max score:", None))
-        self.composer_search_button.setText(QCoreApplication.translate("Bits", u"Search", None))
+        self.composer_search_button.setText(QCoreApplication.translate("Bits", u"Compute", None))
         self.composer_save_button.setText(QCoreApplication.translate("Bits", u"Save", None))
         self.composer_select_button.setText(QCoreApplication.translate("Bits", u"Select", None))
         self.composer_output_button.setText(QCoreApplication.translate("Bits", u"Output file", None))
